@@ -71,12 +71,14 @@ export default function SignIn() {
 //___________________________________Processing__________________________________________________
   
   const [user, setUser] = useState({
-    email: "",
+    username: "",
     password: "",
     role: "Student"
   });
 
   function handleChange(event){
+    event.preventDefault();
+    console.log(event.target);
     setUser((prev)=>{
       return {...prev, [event.target.name]: event.target.value};
     });
@@ -114,7 +116,8 @@ export default function SignIn() {
                     <Select
                       labelId="role"
                       id="role"
-                      value={user.role}
+                      name = "role"
+                      value = {user.role}
                       onChange={handleChange}
                       className={classes.selectEmpty}
                       
@@ -132,15 +135,17 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
               onChange = {handleChange}
               autoFocus
-              value = {user.email}
+              value = {user.username}
               
             />
+            <FormHelperText><i>For students, admission number is the username.</i></FormHelperText>
+            
             <TextField
               variant="outlined"
               margin="normal"
