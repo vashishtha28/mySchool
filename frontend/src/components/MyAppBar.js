@@ -35,12 +35,12 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-function MyAppBar(){
+function MyAppBar(props){
     const classes = useStyles();
     return <AppBar position="static">
         <Toolbar>
             <Typography variant="h5" className={classes.title}>
-                mySchool
+                {props.appBarTitle}
             </Typography>
         </Toolbar>
     </AppBar>;

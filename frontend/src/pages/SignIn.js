@@ -24,6 +24,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import MyAppBar from '../components/MyAppBar';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import server_url from "../components/ServerLink";
 
 function Copyright() {
   return (
@@ -85,7 +86,7 @@ export default function SignIn() {
   }
   function handleSubmit(event){
     event.preventDefault();
-    axios.post('http://localhost:5000/login', user)
+    axios.post(server_url+ "/login", user)
     .then((response) => {
       alert(response.data.message);
     }, (error) => {
@@ -97,7 +98,7 @@ export default function SignIn() {
 
   return (
     <div>
-      <MyAppBar/>
+      <MyAppBar appBarTitle="Sign in page"/>
       <Container component="main" maxWidth="xs" >
         <CssBaseline />
         <div className={classes.paper} >

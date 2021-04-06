@@ -81,11 +81,12 @@ const studentSchema = new mongoose.Schema({
   fatherName: String,
   motherName: String,
   parentEmailId: String,
+  parentContact: String,
   attendanceList: [attendanceSchema],
   gradeCard: [testResultSchema],
   notices: [noticeSchema]
 });
-
+const StudentInfo = new mongoose.model("StudentInfo", studentSchema);
 const teacherSchema = new mongoose.Schema({
   username: String,
   role: String,
@@ -117,9 +118,50 @@ app.get('/', (req, res) => {
 
 //__________________________________________________app.post()__________________________________________________
 
+app.post("/register/student", async function(req, res){
+  //register from passport in USERs
+  await User.register({username: req.body.admissionNum}, req.body.password, async function(err, user){
+    if(err){
+      console.log(err);
+    }
+    else{
+      console.log("Student successfully registered");
+      const newStudent = new StudentInfo({
+        username: req.body.admissionNum,
+        role: "Student",
+        studentName: req.body.studentName,
+        class: req.body.class,
+        section: req.body.section,
+        rollNum: req.body.rollNum,
+        fatherName: req.body.fatherName,
+        motherName: req.body.motherName,
+        parentEmailId: req.body.parentEmailId,
+        parentContact: req.body.parentContact,
+        attendanceList:[],
+        gradeCard: [],
+        notices: []
+      });
+
+      newStudent.save(function(err){
+       if(err){
+         console.log(err);
+       }
+       else{
+         console.log("Student info saved successfuly");
+         res.send({message: "registered and saved student"});
+       }
+     });
+    }
+  });
+
+ 
+
+
+  //add student in studentInfo collection in mongoDB
+});
 
 app.post("/login", function(req, res){
-  console.log(req.body);
+  // console.log(req.body);
   
     const user = new User({
       username: req.body.username,
@@ -131,16 +173,36 @@ app.post("/login", function(req, res){
       }
       else{
         passport.authenticate("local")(req, res, function(){
-          console.log("Admin logged in.");
-        });//after authentication, send userInfo as a response.
+          console.log("User logged in.");
+          //after authentication, send userInfo as a response (if its not admin)
+        });
       }
     });
+  
 });
 
 app.post("/logout", function(req, res){
   req.logout();
   res.redirect("/");
   //send confirmation to frontend and redirect to homepage.
+});
+
+app.post("/checkuser", function(req, res){
+  console.log(req.body);
+  User.find({ username: req.body.admissionNum}, function (err, docs) {
+    if(err){
+      console.log(err);
+    }
+    else{
+      if(!docs){
+        res.send({message: "username available"});
+      }
+      else{
+        res.send({message: "user already registered"});
+      }
+    }
+  });
+  
 });
 
 
