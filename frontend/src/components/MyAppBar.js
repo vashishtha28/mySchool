@@ -3,6 +3,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { AppBar } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from '@material-ui/core/styles';
+import Button from "@material-ui/core/Button";
 
 export const useStyles = makeStyles((theme) => ({
     paper: {
@@ -35,16 +36,42 @@ export const useStyles = makeStyles((theme) => ({
   }));
 
 
-function MyAppBar(props){
+  function MyAppBar(props){
     const classes = useStyles();
-    return <AppBar position="static" style={{ backgroundColor: "#222831" }}>
-        <Toolbar>
-            <Typography variant="h5" className={classes.title}>
-                {props.appBarTitle}
-            </Typography>
-        </Toolbar>
-    </AppBar>;
-}
+    const signedInUser = props.user;
+    //const history = useHistory();
+    function handleLogout(){
 
-//Add a logout button too
+    }
+    // function handleLogout(event){
+    // //   event.preventDefault();
+    // //   await axios.post('http://localhost:5000/logout', signedInUser)
+    // //   .then((response) => {
+    // //     alert(response.data.message);
+    // //   }, (error) => {
+    // //     console.log(error);
+    // //   });
+    // // console.log(user);
+
+    // //TO DO : SEND LOGOUT REQUEST TO SERVER TO SE ISSIGNEDIN TO FALSE
+
+    // history.push('/');//NOW GO TO THE HOME PAGE: DONE
+
+    // }
+    
+    return <div className={classes.root}>
+          <AppBar position="static" style={{ backgroundColor: "#222831" }}>
+              <Toolbar style = {{justifyContent: 'space-between'}}>
+                  <Typography variant="h5" className={classes.title}>
+                      mySchool
+                  </Typography>
+                  <Typography variant="h4" className={classes.title}>
+                      {props.userName}
+                  </Typography>
+                  <Button variant="outlined"  color="inherit" onClick={handleLogout}>Logout</Button>
+              </Toolbar>
+          </AppBar>
+
+      </div> ;
+}
 export default MyAppBar;
