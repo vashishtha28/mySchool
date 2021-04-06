@@ -87,6 +87,7 @@ const studentSchema = new mongoose.Schema({
   notices: [noticeSchema]
 });
 const StudentInfo = new mongoose.model("StudentInfo", studentSchema);
+
 const teacherSchema = new mongoose.Schema({
   username: String,
   role: String,
@@ -98,6 +99,7 @@ const teacherSchema = new mongoose.Schema({
   classTeacherOf: classSchema,
   notices: [noticeSchema]
 });
+const TeacherInfo = new mongoose.model("TeacherInfo", teacherSchema);
 
 //_____________________________________________app.get()____________________________________
 app.get('/', (req, res) => {

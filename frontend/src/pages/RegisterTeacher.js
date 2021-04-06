@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-function RegisterStudent(){
+function RegisterTeacher(){
     const classes = useStyles();
     const [isSubmitted, setSubmitted] = useState(false);
     const [userExistStatus, setExistStatus] = useState(false);
@@ -106,7 +106,7 @@ function RegisterStudent(){
          }
       }
     return <div>
-        <MyAppBar appBarTitle="Student registration"/>
+        <MyAppBar appBarTitle="Teacher registration"/>
         <Container  component="main" maxWidth="md">
         <CssBaseline />
         <form style={{ width: '100%'}} noValidate>  
@@ -363,4 +363,4 @@ function RegisterStudent(){
     </div>
 }
 
-export default RegisterStudent;
+export default RegisterTeacher;
