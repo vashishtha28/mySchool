@@ -37,7 +37,7 @@ export const useStyles = makeStyles((theme) => ({
 
 function MyAppBar(props){
     const classes = useStyles();
-    return <AppBar position="static">
+    return <AppBar position="static" style={{ backgroundColor: "#222831" }}>
         <Toolbar>
             <Typography variant="h5" className={classes.title}>
                 {props.appBarTitle}
