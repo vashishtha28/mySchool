@@ -12,7 +12,7 @@ const Main = () => {
   return (
       <BrowserRouter>
         <Switch> {/* The Switch decides which component to show based on the current URL.*/}
-            {/* following is the list of all the pages and there corresponding routes */}
+            {/* following is the list of all the pages and there corresponding routes ..*/}
         <Route exact path='/' component={SignIn}></Route>
         <Route exact path='/student/profile' component={StudentProfile}></Route>
         <Route exact path='/teacher/profile' component={TeacherProfile}></Route>
