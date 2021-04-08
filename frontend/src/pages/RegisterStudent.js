@@ -78,7 +78,7 @@ function RegisterStudent(){
              setEmptyWarning(false);
              //check if username already exists
              //send search request to server.
-            const a  = await axios.post(server_url+ "/checkuser", {admissionNum: student.admissionNum})
+            const a  = await axios.post(server_url+ "/checkuser", {userName: student.admissionNum})
             .then((response)=>{
                 console.log(response.data.message);
                 if(response.data.message==="username available"){
