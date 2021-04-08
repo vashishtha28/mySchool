@@ -35,6 +35,14 @@ export default function Calendar() {
     //     return schema[day].isPresent;
     // }
 
+    function beforeYearStart() {
+        return  value.month() !=3 ;
+    }
+
+    function afterYearEnd() {
+        return value.month() != 2 ;
+    }
+
     function beforeToday(day) {
         return day.isBefore(new Date(), "day");
     }
@@ -67,11 +75,15 @@ export default function Calendar() {
     }
 
     return (
+
             <div className="calendar">
+
+                <div>{beforeYearStart()}</div>
+
                 <div className="header">
-                    <div className="previous" onClick={() => setValue(prevMonth())} style={{ cursor: 'pointer' }}>{ String.fromCharCode(171) }</div>
+                    <div className="previous" onClick={() => beforeYearStart() && setValue(prevMonth())} style={{ cursor: 'pointer' }}>{ beforeYearStart() ? String.fromCharCode(171) : null}</div>
                     <div className="current"> { currentMonthName() } { currentYear() } </div>
-                    <div className="next" onClick={() => setValue(nextMonth())} style={{ cursor: 'pointer' }}>{ String.fromCharCode(187) }</div>
+                    <div className="next" onClick={() => afterYearEnd() && setValue(nextMonth())} style={{ cursor: 'pointer' }}>{ afterYearEnd() ? String.fromCharCode(187) : null }</div>
                 </div>
                 <div className="body">
                     <div className="day-names">
