@@ -1,6 +1,6 @@
 import React from 'react';
 import './../infobar.css';
-import { useStyles } from './../components/MyAppBar';
+import MyAppBar, { useStyles } from './../components/MyAppBar';
 import Toolbar from "@material-ui/core/Toolbar";
 import { AppBar, Box } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography";
@@ -17,13 +17,14 @@ function StudentProfile() {
 
     return (
         <div>
-            <AppBar position="static" style={{ backgroundColor: "#222831" }}>
+            {/* <AppBar position="static" style={{ backgroundColor: "#222831" }}>
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>
                         Student Profile
                     </Typography>
                 </Toolbar>
-            </AppBar>
+            </AppBar> */}
+            <MyAppBar/>
             <div>
             <Box style={{ backgroundColor: "#00ADB5", padding: '3.679890560875513vh', }}>
                 <Container component="main" maxWidth="md">

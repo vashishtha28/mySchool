@@ -54,6 +54,7 @@ const classSchema = new mongoose.Schema({
   class: String,
   section: String
 });
+const Class = new mongoose.model("Class", classSchema);
 
 const noticeSchema = new mongoose.Schema({
   date: Date,
@@ -120,6 +121,44 @@ app.get('/', (req, res) => {
 
 //__________________________________________________app.post()__________________________________________________
 
+app.post("/register/teacher", async function(req, res){
+  console.log(req.body);
+  //register from passport in USERs
+  await User.register({username: req.body.emailId}, req.body.password, async function(err, user){
+    if(err){
+      console.log(err);
+    }
+    else{
+      console.log("Teacher successfully registered");
+      const newClass = new Class({
+        class: req.body.classTeacherOfClass,
+        section: req.body.classTeacherOfSection
+      });
+
+      const newTeacher = new TeacherInfo({
+        username: req.body.emailId,
+        role: "Teacher",
+        teacherName: req.body.teacherName,
+        mobileNum: req.body.mobileNum,
+        classes: req.body.classes,
+        classTeacherOf:newClass, //pending,
+        subjects: req.body.subjects,
+        notices: []
+      });
+
+      newTeacher.save(function(err){
+       if(err){
+         console.log(err);
+       }
+       else{
+         console.log("Teacher info saved successfuly");
+         res.send({message: "registered and saved Teacher"});
+       }
+     });
+    }
+  });
+});
+
 app.post("/register/student", async function(req, res){
   //register from passport in USERs
   await User.register({username: req.body.admissionNum}, req.body.password, async function(err, user){
@@ -155,11 +194,6 @@ app.post("/register/student", async function(req, res){
      });
     }
   });
-
- 
-
-
-  //add student in studentInfo collection in mongoDB
 });
 
 app.post("/login", function(req, res){
@@ -191,7 +225,7 @@ app.post("/logout", function(req, res){
 
 app.post("/checkuser", function(req, res){
   console.log(req.body);
-  User.find({ username: req.body.admissionNum}, function (err, docs) {
+  User.find({ username: req.body.userName}, function (err, docs) {
     if(err){
       console.log(err);
     }

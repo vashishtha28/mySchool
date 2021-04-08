@@ -9,6 +9,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import MyAppBar from "../components/MyAppBar";
 
 function TeacherDesk() {
     const classes = useStyles();
@@ -16,13 +17,7 @@ function TeacherDesk() {
 
     return (
        <div>
-           <AppBar position="static" style={{ backgroundColor: "#222831" }}>
-                <Toolbar>
-                    <Typography variant="h6">
-                        Teacher Desk
-                    </Typography>
-                </Toolbar>
-            </AppBar>
+           <MyAppBar/>
             <Box style={{ backgroundColor: "#00ADB5", padding: '3.679890560875513vh', }}>
                 <Container component="main" maxWidth="md">
                 <Grid container style={{ justifyContent: 'space-around' }}>
