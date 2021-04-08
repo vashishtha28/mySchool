@@ -7,6 +7,8 @@ import TeacherProfile from "../pages/teacherDesk";
 import AdminProfile from "../pages/AdminWelcome";
 import RegisterStudent from '../pages/RegisterStudent';
 import RegisterTeacher from '../pages/RegisterTeacher';
+import GenerateNotice from './../pages/genNotice';
+import StudentAttendance from './../pages/studentAttendance';
 
 const Main = () => {
   return (
@@ -19,6 +21,8 @@ const Main = () => {
         <Route exact path='/admin/profile' component={AdminProfile}></Route>
         <Route exact path='/register/student' component={RegisterStudent}></Route>
         <Route exact path="/register/teacher" component={RegisterTeacher}></Route>
+        <Route exact path='/admin/generateNotice' component={GenerateNotice}></Route>
+        <Route exact path='/student/attendance' component={StudentAttendance}></Route>
         </Switch>
 
       </BrowserRouter>
