@@ -326,7 +326,7 @@ function RegisterTeacher(){
 
       
     return <div>
-        <MyAppBar appBarTitle="Teacher registration"/>
+        <MyAppBar appBarTitle="Teacher Registration"/>
         <Container  component="main" maxWidth="md">
         <CssBaseline />
         <form style={{ width: '100%'}} noValidate>  
