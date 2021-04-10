@@ -80,12 +80,12 @@ export const useStyles = makeStyles((theme) => ({
           <AppBar position="static" style={{ backgroundColor: "#222831" }}>
               <Toolbar style = {{justifyContent: 'space-between'}}>
                   <Typography variant="h5" className={classes.title}>
-                      mySchool
+                  <img src="https://i.ibb.co/6J1kdpx/image-7.png" />
                   </Typography>
-                  <Typography variant="h4" className={classes.title}>
+                  <Typography variant="h6" className={classes.title}>
                       {props.appBarTitle}
                   </Typography>
-                  <Button variant="outlined"  color="inherit" onClick={handleSuccessfulLogout}>Logout</Button>
+                  <Button color="inherit" onClick={handleSuccessfulLogout}><img src="https://i.ibb.co/fdRTb38/logout.png"  /></Button>
               </Toolbar>
           </AppBar>
 
