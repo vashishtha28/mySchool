@@ -116,7 +116,7 @@ function StudentProfile(props) {
                 </Grid>
             </Container>  
             </div>
-            { props.loggedInStatus==="LOGGED-IN" ? null : <Redirect to="/" /> }
+            { props.role==="Student" && props.loggedInStatus==="LOGGED-IN" ? null : <Redirect to="/" /> }
         </div>
     );
 }

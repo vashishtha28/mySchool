@@ -64,9 +64,9 @@ export const useStyles = makeStyles((theme) => ({
         }
     
         await axios.post(server_url+ "/logout", user)
-        .then((response)=>{
+        .then(async (response)=>{
           console.log(response.data.message); //Successfully LoggedOut
-          props.handleLogout();
+          await props.handleLogout();
           //redirect to signin page
           history.push("/");
         }, (error)=>{

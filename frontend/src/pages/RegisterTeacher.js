@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-function RegisterTeacher(){
+function RegisterTeacher(props){
 
     const classes = useStyles();
     const history = useHistory();
@@ -201,7 +201,7 @@ function RegisterTeacher(){
                  console.log(teacher);
                 axios.post(server_url+ "/register/teacher", teacher)
                 .then((response)=>{
-                    alert(response.data.message);
+                    // alert(response.data.message);
                     setSubmitted(true);
                     
                     /////////////////////////////////////////TODO:::then redirect to login page
@@ -329,7 +329,13 @@ function RegisterTeacher(){
 
       
     return <div>
-        <MyAppBar appBarTitle="Teacher registration"/>
+        <MyAppBar 
+        loggedInStatus={props.loggedInStatus} 
+        handleLogout={props.handleLogout} 
+        userInfo={props.userInfo} 
+        role={props.role} 
+        appBarTitle="Teacher Registration"
+        />
         <Container  component="main" maxWidth="md">
         <CssBaseline />
         <form style={{ width: '100%'}} noValidate>  
@@ -572,7 +578,7 @@ function RegisterTeacher(){
         </Container>
         
 
-
+        { props.role==="Admin"&&props.loggedInStatus==="LOGGED-IN" ? null : <Redirect to="/" /> }           
     </div>
 }
 

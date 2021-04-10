@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './../infobar.css';
 import { useStyles } from './../components/MyAppBar';
 import {Redirect} from "react-router-dom";
@@ -15,11 +15,19 @@ import MyAppBar from "../components/MyAppBar";
 function TeacherDesk(props) {
     const classes = useStyles();
     const infoclasses = infoStyles();
-    const subjectList = props.userInfo.subjects;
-    const classList = props.userInfo.classes;
+    const [subjectList, setSubjectList] = useState([]);
+    const [classList, setClassList] = useState([]);
+
+
+    useEffect(async ()=>{
+            await setClassList(props.userInfo.classes);
+            await setSubjectList(props.userInfo.subjects);
+    }, []);
+
+
 
     return (
-       <div style={{fontFamily:"Rosario"}}>
+       <div >
            <MyAppBar 
             loggedInStatus={props.loggedInStatus} 
             handleLogout={props.handleLogout} 
@@ -51,19 +59,19 @@ function TeacherDesk(props) {
                             </td>
                         </tr>
 
-                        <tr>
-                            <td>Classes:</td>
+                        {/* <tr> */}
+                            {/* <td>Classes:</td> */}
                             {/* TODO: Handle this */}
-                            <td>
-                                {classList.map((c)=>{
+                            {/* <td> */}
+                                {/* {classList.map((c)=>{
                                     return <tr><td>{c.class}th {c.section}</td></tr>
-                                })}
-                            </td>
-                        </tr>
-                        {props.userInfo.classTeacherOf.class!=="" && props.userInfo.classTeacherOf.section!=="" && <tr>
+                                })} */}
+                            {/* </td> */}
+                        {/* </tr> */}
+                        {/* {props.userInfo.classTeacherOf.class!=="" && props.userInfo.classTeacherOf.section!=="" && <tr>
                             <td>Class-teacher of:</td>
                             <td>{props.userInfo.classTeacherOf.class}th {props.userInfo.classTeacherOf.section}</td>
-                        </tr>}
+                        </tr>} */}
 
                         <tr>
                             <td>Phone No:</td>
@@ -113,7 +121,7 @@ function TeacherDesk(props) {
                     </Grid>
                 </Grid>
             </Container>
-            { props.loggedInStatus==="LOGGED-IN" ? null : <Redirect to="/" /> }
+            { props.role==="Teacher" && props.loggedInStatus==="LOGGED-IN" ? null : <Redirect to="/" /> }
        </div>
     );
 }

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Redirect} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import axios from "axios";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -48,6 +48,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AdminPage(props) {
   const classes = useStyles();
+  const history = useHistory();
+
+  function handleAddStudent(){
+    history.push("/register/student");
+  }
+
+  function handleAddTeacher(){
+    history.push("/register/teacher");
+  }
 
   return (
 
@@ -66,13 +75,13 @@ export default function AdminPage(props) {
       <Container component="main" maxWidth="md" style={{ marginTop: "10%"}}>
       <Grid container spacing={3}>
         <Grid item xs={6}>
-          <Paper className={classes.paper} style={{ background: "#00B594"}} >Add Student</Paper>
+          <Paper className={classes.paper} style={{ background: "#00B594"}} onClick={handleAddStudent} >Add Student</Paper>
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper} style={{ background: "#E96565"}}>Remove Student</Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.paper} style={{ background: "#00B594"}}>Add Teacher</Paper>
+          <Paper className={classes.paper} style={{ background: "#00B594"}} onClick={handleAddTeacher}>Add Teacher</Paper>
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper} style={{ background: "#E96565"}}>Remove teacher</Paper>
@@ -91,7 +100,7 @@ export default function AdminPage(props) {
         </Grid>
       </Grid>
       </Container>
-      { props.loggedInStatus==="LOGGED-IN" ? null : <Redirect to="/" /> }
+      { props.role==="Admin"&&props.loggedInStatus==="LOGGED-IN" ? null : <Redirect to="/" /> }
     </div>
   );
 }
