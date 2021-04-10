@@ -25,6 +25,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import MyAppBar from '../components/MyAppBar';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import server_url from "../components/ServerLink";
+import {Redirect, useHistory} from "react-router-dom";
 
 function Copyright() {
   return (
@@ -38,7 +39,8 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    //marginTop: theme.spacing(8),
+    marginTop:"auto",
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -66,9 +68,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
   
   const classes = useStyles();
+  const history = useHistory();
 //___________________________________Processing__________________________________________________
   
   const [user, setUser] = useState({
@@ -76,6 +79,25 @@ export default function SignIn() {
     password: "",
     role: "Student"
   });
+
+  useEffect(()=>{
+    if(props.loggedInStatus==="LOGGED-IN"){
+      console.log(props.userInfo);
+      history.push("/"+ props.role + "/profile");
+    }
+
+  }, [props.loggedInStatus]);
+  
+  async function handleSuccessfulLogin(data){
+    //DONE: Update parent component
+    await props.handleLogin(data);
+
+    //Redirect
+    console.log(props.loggedInStatus);
+    console.log(props.userInfo);
+    if(props.loggedInStatus==="LOGGED-IN")history.push("/"+ user.role + "/profile");
+
+  }
 
   function handleChange(event){
     event.preventDefault();
@@ -88,19 +110,29 @@ export default function SignIn() {
     event.preventDefault();
     axios.post(server_url+ "/login", user)
     .then((response) => {
-      alert(response.data.message);
+      console.log(response);
+      if(response.data.message ==="LOGGED-IN") handleSuccessfulLogin(response.data);
+      else if(response) alert(response.data.message);
     }, (error) => {
       console.log(error);
+      alert("INCORRECT PASSWORD");
     });
-    console.log(user);
   }
-  //____________________________________________________________________________________________
+  //______________________________________________________________________ ______________________
 
   return (
     <div>
-      <MyAppBar appBarTitle="Sign in page"/>
+      <MyAppBar 
+        loggedInStatus={props.loggedInStatus} 
+        handleLogout={props.handleLogout} 
+        userInfo={props.userInfo} 
+        role={props.role} 
+        appBarTitle="Sign in page"
+        />
+        
       <Container component="main" maxWidth="xs" >
         <CssBaseline />
+        <Grid container md spacing={3} className={classes.paper} style={{background:"#ffffff", borderRadius: 10, boxShadow: "20px 20px 50px #e5e5e5", marginTop: "100px", padding: "10px 30px", marginLeft:"auto",marginRight:"auto" }}>
         <div className={classes.paper} >
           <Avatar className={classes.avatar}>
             <AccountCircleIcon />
@@ -121,7 +153,7 @@ export default function SignIn() {
                       value = {user.role}
                       onChange={handleChange}
                       className={classes.selectEmpty}
-                      
+                      autoFocus
                       
                     >
                         <MenuItem value={"Student"}>Student</MenuItem>
@@ -137,15 +169,15 @@ export default function SignIn() {
               required
               fullWidth
               id="username"
-              label="Username"
+              label={user.role=="Student" && "Admission number" ||user.role=="Teacher" && "Email Id" || user.role=="Admin" && "username"}
               name="username"
               autoComplete="username"
               onChange = {handleChange}
-              autoFocus
+              
               value = {user.username}
               
             />
-            <FormHelperText><i>For students, admission number is the username.</i></FormHelperText>
+            
             
             <TextField
               variant="outlined"
@@ -190,6 +222,7 @@ export default function SignIn() {
             </Grid> */}
           </form>
         </div>
+        </Grid>
         <Box mt={8}>
           <Copyright />
         </Box>

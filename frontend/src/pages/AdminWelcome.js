@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Redirect} from "react-router-dom";
 import axios from "axios";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -45,14 +46,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function AdminPage() {
+export default function AdminPage(props) {
   const classes = useStyles();
 
   return (
 
     <div className={classes.root}>
     
-      <MyAppBar appBarTitle="Welcome to MySchool"/>
+    
+    <MyAppBar 
+        loggedInStatus={props.loggedInStatus} 
+        handleLogout={props.handleLogout} 
+        userInfo={props.userInfo} 
+        role={props.role} 
+        appBarTitle="Admin"
+        />
+      <h1>{props.loggedInStatus}</h1>
 
       <Container component="main" maxWidth="md" style={{ marginTop: "10%"}}>
       <Grid container spacing={3}>
@@ -82,6 +91,7 @@ export default function AdminPage() {
         </Grid>
       </Grid>
       </Container>
+      { props.loggedInStatus==="LOGGED-IN" ? null : <Redirect to="/" /> }
     </div>
   );
 }

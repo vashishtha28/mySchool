@@ -1,6 +1,7 @@
 import React from 'react';
 import './../infobar.css';
 import { useStyles } from './../components/MyAppBar';
+import {Redirect} from "react-router-dom";
 import Toolbar from "@material-ui/core/Toolbar";
 import { AppBar, Box } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography";
@@ -11,37 +12,68 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import MyAppBar from "../components/MyAppBar";
 
-function TeacherDesk() {
+function TeacherDesk(props) {
     const classes = useStyles();
     const infoclasses = infoStyles();
+    const subjectList = props.userInfo.subjects;
+    const classList = props.userInfo.classes;
 
     return (
-       <div>
-           <MyAppBar/>
+       <div style={{fontFamily:"Rosario"}}>
+           <MyAppBar 
+            loggedInStatus={props.loggedInStatus} 
+            handleLogout={props.handleLogout} 
+            userInfo={props.userInfo} 
+            role={props.role} 
+            appBarTitle="Teacher's Profile"
+            />
+            {/* <h1>{props.loggedInStatus}</h1> */}
             <Box style={{ backgroundColor: "#00ADB5", padding: '3.679890560875513vh', }}>
-                <Container component="main" maxWidth="md">
+                <Container component="main" maxWidth="md" >
                 <Grid container style={{ justifyContent: 'space-around' }}>
                     <Grid item xs={12} sm={5} style={{ alignContent: 'right', float: 'left' }}>
                         <img src="https://i.ibb.co/1649P7S/teacher.png" alt="teacher" border="0" />
                     </Grid>
                     <Grid item xs={12} sm={7} style={{ justifyContent: 'center' }}>
-                    <table>
+                    <table >
                         <tr>
-                            <td>Teacher Name:</td>
-                            <td>xxxxxxxxxxx xxxxxxxxxxx</td>
+                            <td>Name:</td>
+                            <td>{props.userInfo.teacherName}</td>
                         </tr>
+                        
                         <tr>
-                            <td>Subjects:</td>
-                            <td>Sub1, Sub2, Sub3, Sub4</td>
+                            <td>Subject(s):</td>
+                            {/* TODO: Handle this */}
+                            <td>
+                                {subjectList.map((sub)=>{
+                                    return <tr><td>{sub}</td></tr>
+                                })}
+                            </td>
                         </tr>
+
+                        <tr>
+                            <td>Classes:</td>
+                            {/* TODO: Handle this */}
+                            <td>
+                                {classList.map((c)=>{
+                                    return <tr><td>{c.class}th {c.section}</td></tr>
+                                })}
+                            </td>
+                        </tr>
+                        {props.userInfo.classTeacherOf.class!=="" && props.userInfo.classTeacherOf.section!=="" && <tr>
+                            <td>Class-teacher of:</td>
+                            <td>{props.userInfo.classTeacherOf.class}th {props.userInfo.classTeacherOf.section}</td>
+                        </tr>}
+
                         <tr>
                             <td>Phone No:</td>
-                            <td>1234567890</td>
+                            <td>{props.userInfo.mobileNum}</td>
                         </tr>
                         <tr>
                             <td>Email:</td>
-                            <td>ektohmailid@gmail.com</td>
+                            <td>{props.userInfo.username}</td>
                         </tr>
+                        
                     </table>
                     </Grid>
                 </Grid>
@@ -81,6 +113,7 @@ function TeacherDesk() {
                     </Grid>
                 </Grid>
             </Container>
+            { props.loggedInStatus==="LOGGED-IN" ? null : <Redirect to="/" /> }
        </div>
     );
 }

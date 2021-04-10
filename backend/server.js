@@ -5,6 +5,11 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
+const serverGlobalData = {
+  user:{},
+  role:"",
+  loggedInStatus:"NOT_LOGGED-IN"
+};
 
 const app = express();
 const port = 5000;
@@ -14,8 +19,12 @@ app.use(cors());
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    maxAge: 60*60*1000
+}
 }));
 
 app.use(passport.initialize());
@@ -105,6 +114,32 @@ const TeacherInfo = new mongoose.model("TeacherInfo", teacherSchema);
 //_____________________________________________app.get()____________________________________
 app.get('/', (req, res) => {
   res.send('<h1>Welcome to the mySchool backend</h1>')
+});
+
+app.get('/checksession', function(req, res){
+  // console.log(req.session);
+  // if(req.isAuthenticated()){
+  //   const serverGlobalData = {
+  //     user:req.user,
+  //     loggedInStatus:"LOGGED-IN"
+  //   };
+  //   console.log(req.user);
+  //   res.send(serverGlobalData);
+  // }
+  // else{
+  //   console.log(req.user);
+  //   console.log("no user Signed in");
+  //   const serverGlobalData = {
+  //     user:{},
+  //     role:"",
+  //     loggedInStatus:"NOT_LOGGED-IN"
+  //   };
+  //   res.send(serverGlobalData);
+  // }
+  console.log(serverGlobalData);
+  res.send(serverGlobalData);
+  
+
 });
 
 //___________________________________________________________________________________________
@@ -198,29 +233,132 @@ app.post("/register/student", async function(req, res){
 
 app.post("/login", function(req, res){
   // console.log(req.body);
-  
+  // console.log(req.session);
     const user = new User({
       username: req.body.username,
       password: req.body.password
     });
-    req.login(user, function(err){
-      if(err){
-        console.log(err);
+
+    User.exists({username: req.body.username}, function (err, doc) {
+      if (err){
+          console.log(err)
+      }else{
+          if(!doc){
+            //USER DOES NOT EXIST
+            res.send({message:"USER NOT FOUND", role:"", userInfo:{}});
+          }
+          else{
+            //REST ALL HAPPENS HERE
+            req.login(user, function(err){
+              if(err){
+                console.log(err);
+                res.send({message:"LOGIN-FAILED", role:"", userInfo:{}});
+              }
+              else{
+                passport.authenticate("local")(req, res, function(){                  
+                  
+                  //after authentication, send userInfo as a response (if its not admin)
+                  if(req.body.role==="Student"){
+                    StudentInfo.exists({username: req.body.username}, function(errorr, studDoc){
+                      if(errorr)console.log(errorr);
+                      else{
+                        if(studDoc){
+                          //=> such student exists
+                          StudentInfo.find({ username: req.body.username}, function (err, docs) {
+                            if(err){
+                              console.log(err);
+                            }
+                            else{
+                              console.log(docs);
+                              console.log(req.user);
+                              serverGlobalData.user = docs[0];
+                              serverGlobalData.role = "Student";
+                              serverGlobalData.loggedInStatus = "LOGGED-IN";
+                              //console.log(req.isAuthenticated());///////////////////////////////////////////////////////////////
+                              console.log(req.body.role+ " logged in.");
+                              res.send({message: "LOGGED-IN", role:"Student", userInfo: docs[0]});
+                            }
+                          });
+                        }else{
+                          res.send({message:"LOGIN FAILED: ROLE MISMATCH"});
+                        }
+                      }
+                    });
+                  }
+                  else if(req.body.role==="Teacher"){
+                    TeacherInfo.exists({username: req.body.username}, function(errorr, teacherDoc){
+                      if(errorr)console.log(errorr);
+                      else{
+                        if(teacherDoc){
+                          TeacherInfo.find({ username: req.body.username}, function (err, docs) {
+                            if(err){
+                              console.log(err);
+                            }
+                            else{
+                              console.log(docs);
+                              serverGlobalData.user = docs[0];
+                              serverGlobalData.role = "Teacher";
+                              serverGlobalData.loggedInStatus = "LOGGED-IN";
+                              console.log(req.body.role+ " logged in.");
+                              res.send({message: "LOGGED-IN", role:"Teacher", userInfo: docs[0]});
+                            }
+                          });
+                        }else{
+                          res.send({message:"LOGIN FAILED: ROLE MISMATCH"});
+                        }
+                      }
+                    })
+                  }
+                  else if(req.body.role==="Admin"){
+                    StudentInfo.exists({username: req.body.username}, function(E, stuDOC){
+                      if(E)console.log(E);
+                      else{
+                        if(!stuDOC){
+                          TeacherInfo.exists({username: req.body.username}, function(ERROR, teaDocs){
+                            if(ERROR)consle.log(ERROR);
+                            else{
+                              if(!teaDocs){
+                                //=> IT IS NONE OTHER THAN the ADMIN
+                                serverGlobalData.user = {};
+                                serverGlobalData.role = "Admin";
+                                serverGlobalData.loggedInStatus = "LOGGED-IN";
+                                console.log(req.body.role+ " logged in.");
+                                res.send({message:"LOGGED-IN", role:"Admin", userInfo: {}});
+                                
+                              }else{//It was a Teacher
+                                res.send({message:"LOGIN FAILED: ROLE MISMATCH"});
+                              }
+                            }
+                          });
+
+                        }else{//It was a student
+                          res.send({message:"LOGIN FAILED: ROLE MISMATCH"});
+                        }
+                      }
+                    });
+                      
+                        
+                  }
+        
+                });
+              }
+            });
+
+          }
       }
-      else{
-        passport.authenticate("local")(req, res, function(){
-          console.log("User logged in.");
-          //after authentication, send userInfo as a response (if its not admin)
-        });
-      }
-    });
+  });
+    
   
 });
 
-app.post("/logout", function(req, res){
-  req.logout();
-  res.redirect("/");
-  //send confirmation to frontend and redirect to homepage.
+app.post("/logout", async function(req, res){
+  //console.log(req.isAuthenticated());//////////////////////////////////////////////////////////////////////////////////
+  await req.logout();
+  serverGlobalData.user = {};
+  serverGlobalData.role = "";
+  serverGlobalData.loggedInStatus = "NOT_LOGGED-IN";
+  console.log("Logged out user");
+  res.send({message:"Successfully logged out"});
 });
 
 app.post("/checkuser", function(req, res){

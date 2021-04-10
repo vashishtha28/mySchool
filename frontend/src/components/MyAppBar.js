@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import { AppBar } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
+import server_url from "../components/ServerLink";
+import {Redirect, useHistory} from "react-router-dom";
+import axios from "axios";
 
 export const useStyles = makeStyles((theme) => ({
     paper: {
@@ -38,39 +41,51 @@ export const useStyles = makeStyles((theme) => ({
 
   function MyAppBar(props){
     const classes = useStyles();
-    const signedInUser = props.user;
-    //const history = useHistory();
+    const userinfo = props.userInfo;
+    const role = props.role;
+    const [user, setUser] = useState({username: ""});
+    const history = useHistory();
     function handleLogout(){
 
     }
-    // function handleLogout(event){
-    // //   event.preventDefault();
-    // //   await axios.post('http://localhost:5000/logout', signedInUser)
-    // //   .then((response) => {
-    // //     alert(response.data.message);
-    // //   }, (error) => {
-    // //     console.log(error);
-    // //   });
-    // // console.log(user);
 
-    // //TO DO : SEND LOGOUT REQUEST TO SERVER TO SE ISSIGNEDIN TO FALSE
+  async function handleSuccessfulLogout(event){
+    event.preventDefault();
+    //do all only when loggedInStatus===LOGGED-IN
+    if(props.loggedInStatus==="LOGGED-IN"){
+        if(props.role==="Student"){
+          await setUser({username: props.userInfo.admissionNum});
+        }
+        else if(props.role==="Teacher"){
+          await setUser({username: props.userInfo.emailId});
+        }
+        else if(props.role==="Admin"){
+          await setUser({username: props.userInfo.username});
+        }
+    
+        await axios.post(server_url+ "/logout", user)
+        .then((response)=>{
+          console.log(response.data.message); //Successfully LoggedOut
+          props.handleLogout();
+          //redirect to signin page
+          history.push("/");
+        }, (error)=>{
+          console.log(error);
+        });
+    }
+  }
 
-    // history.push('/');//NOW GO TO THE HOME PAGE: DONE
-
-    // }
     
     return <div className={classes.root}>
           <AppBar position="static" style={{ backgroundColor: "#222831" }}>
               <Toolbar style = {{justifyContent: 'space-between'}}>
-                  <Typography variant="h6" className={classes.title}>
-                      {props.appBarTitle}
+                  <Typography variant="h5" className={classes.title}>
+                      mySchool
                   </Typography>
                   <Typography variant="h4" className={classes.title}>
-                      {props.userName}
+                      {props.appBarTitle}
                   </Typography>
-                  <Button variant="outlined" color="inherit" onClick={handleLogout}>
-                    logout
-                  </Button>
+                  <Button variant="outlined"  color="inherit" onClick={handleSuccessfulLogout}>Logout</Button>
               </Toolbar>
           </AppBar>
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect} from "react-router-dom";
 import './../infobar.css';
 import MyAppBar, { useStyles } from './../components/MyAppBar';
 import Toolbar from "@material-ui/core/Toolbar";
@@ -11,20 +12,20 @@ import Paper from '@material-ui/core/Paper';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 
-function StudentProfile() {    
+function StudentProfile(props) {    
     const classes = useStyles();
     const infoclasses = infoStyles();
 
     return (
         <div>
-            {/* <AppBar position="static" style={{ backgroundColor: "#222831" }}>
-                <Toolbar>
-                    <Typography variant="h6" className={classes.title}>
-                        Student Profile
-                    </Typography>
-                </Toolbar>
-            </AppBar> */}
-            <MyAppBar/>
+            <MyAppBar 
+                loggedInStatus={props.loggedInStatus} 
+                handleLogout={props.handleLogout} 
+                userInfo={props.userInfo} 
+                role={props.role} 
+                appBarTitle="Student's Profile"
+            />
+            {/* <h1>{props.userInfo.studentName}</h1> */}
             <div>
             <Box style={{ backgroundColor: "#00ADB5", padding: '3.679890560875513vh', }}>
                 <Container component="main" maxWidth="md">
@@ -36,31 +37,35 @@ function StudentProfile() {
                     <table>
                         <tr>
                             <td>Student Name:</td>
-                            <td>ABCDS ABCDS</td>
+                            <td>{props.userInfo.studentName}</td>
                         </tr>
                         <tr>
                             <td>Class:</td>
-                            <td>IX B</td>
+                            <td>{props.userInfo.class}th {props.userInfo.section}</td>
                         </tr>
                         <tr>
                             <td>Roll No:</td>
-                            <td>27</td>
+                            <td>{props.userInfo.rollNum}</td>
                         </tr>
                         <tr>
                             <td>Admission No:</td>
-                            <td>789</td>
+                            <td>{props.userInfo.username}</td>
                         </tr>
                         <tr>
                             <td>Father's Name:</td>
-                            <td>Mr. ABSCD ABSDCS</td>
+                            <td>Mr. {props.userInfo.fatherName}</td>
                         </tr>
                         <tr>
                             <td>Mother's Name:</td>
-                            <td>Mr. ABSCD ABSDCS</td>
+                            <td>Mrs. {props.userInfo.motherName}</td>
                         </tr>
                         <tr>
-                            <td>Email:</td>
-                            <td>koimailid@gmail.com</td>
+                            <td>Parent's Email:</td>
+                            <td>{props.userInfo.parentEmailId}</td>
+                        </tr>
+                        <tr>
+                            <td>Parent's Contact:</td>
+                            <td>{props.userInfo.parentContact}</td>
                         </tr>
                     </table>
                     </Grid>
@@ -111,6 +116,7 @@ function StudentProfile() {
                 </Grid>
             </Container>  
             </div>
+            { props.loggedInStatus==="LOGGED-IN" ? null : <Redirect to="/" /> }
         </div>
     );
 }
