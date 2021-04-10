@@ -110,12 +110,12 @@ export default function GenerateNotice() {
                     </Grid>
                 </Box>
                 <Container maxWidth="lg" style={{ marginTop: '12px', maarginBottom: '12px' }}>
-                    <Grid container spacing={3} style={{ justifyContent: 'space-around' }}>
+                    <Grid container spacing={3} style={{ justifyContent: 'space-around',}}>
                         <Grid item xs={12}>
                             <TextField id="filled-basic" label="Notice Title" variant="filled" style={{ width: '100%' }}/>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextareaAutosize aria-label="Body" placeholder="Notice Body" style={{ backgroundColor: '#DCDCDC', fontSize: '16px', padding: '16px', border: 'none', minWidth: '78vw', minHeight: '40vh' }}/>
+                            <TextareaAutosize aria-label="Body" placeholder="Notice Body" style={{ backgroundColor: '#DCDCDC', fontSize: '16px', padding: '16px', border: 'none', minWidth: '70vw', minHeight: '40vh' }}/>
                         </Grid>
                         <Grid item xs={12} sm={4}>
                             <Button variant="contained" style={{ backgroundColor: '#E96565', width: '50%', color: 'white' }}>

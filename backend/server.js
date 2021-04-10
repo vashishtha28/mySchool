@@ -5,11 +5,15 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
+
 const serverGlobalData = {
   user:{},
   role:"",
   loggedInStatus:"NOT_LOGGED-IN"
 };
+//TODO : : =>
+//THIS WILL HAVE TO CHANGE OTHERWISE IT FAILS WHEN MULTIPLE USERS USE IT AT ONCE.
+//WILL HAVE TO FETCH USER DATA BY COOKIES AND ALL.
 
 const app = express();
 const port = 5000;

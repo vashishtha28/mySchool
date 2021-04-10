@@ -17,11 +17,13 @@ function TeacherDesk(props) {
     const infoclasses = infoStyles();
     const [subjectList, setSubjectList] = useState([]);
     const [classList, setClassList] = useState([]);
+    const [classTeacherOf, setClassTeacherOf] = useState({});
 
 
     useEffect(async ()=>{
             await setClassList(props.userInfo.classes);
             await setSubjectList(props.userInfo.subjects);
+            await setClassTeacherOf(props.userInfo.classTeacherOf);
     }, []);
 
 
@@ -45,8 +47,8 @@ function TeacherDesk(props) {
                     <Grid item xs={12} sm={7} style={{ justifyContent: 'center' }}>
                     <table >
                         <tr>
-                            <td>Name:</td>
-                            <td>{props.userInfo.teacherName}</td>
+                            <td><strong>Name:</strong></td>
+                            <td><strong>{props.userInfo.teacherName}</strong></td>
                         </tr>
                         
                         <tr>
@@ -59,19 +61,19 @@ function TeacherDesk(props) {
                             </td>
                         </tr>
 
-                        {/* <tr> */}
-                            {/* <td>Classes:</td> */}
+                        <tr>
+                            <td>Classes:</td>
                             {/* TODO: Handle this */}
-                            {/* <td> */}
-                                {/* {classList.map((c)=>{
-                                    return <tr><td>{c.class}th {c.section}</td></tr>
-                                })} */}
-                            {/* </td> */}
-                        {/* </tr> */}
-                        {/* {props.userInfo.classTeacherOf.class!=="" && props.userInfo.classTeacherOf.section!=="" && <tr>
-                            <td>Class-teacher of:</td>
-                            <td>{props.userInfo.classTeacherOf.class}th {props.userInfo.classTeacherOf.section}</td>
-                        </tr>} */}
+                            <td>
+                                {classList.map((c)=>{
+                                    return <tr><td>{c.class} {c.section}</td></tr>
+                                })}
+                            </td>
+                        </tr>
+                        {classTeacherOf.class!==""&&classTeacherOf.section!==""&&<tr>
+                            <td><strong>Class-teacher of:</strong></td>
+                            <td><strong>{classTeacherOf.class} {classTeacherOf.section}</strong></td>
+                        </tr>}
 
                         <tr>
                             <td>Phone No:</td>
