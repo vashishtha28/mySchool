@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Redirect, useHistory} from "react-router-dom";
 import axios from "axios";
 import MyAppBar from "../components/MyAppBar";
 import Container from '@material-ui/core/Container';
@@ -43,9 +44,10 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-function RegisterTeacher(){
+function RegisterTeacher(props){
 
     const classes = useStyles();
+    const history = useHistory();
     const [counter, setCounter] = useState(0);
     const [isSubmitted, setSubmitted] = useState(false);
     const [disableFlag, setFlag] = useState(true);
@@ -199,10 +201,11 @@ function RegisterTeacher(){
                  console.log(teacher);
                 axios.post(server_url+ "/register/teacher", teacher)
                 .then((response)=>{
-                    alert(response.data.message);
+                    // alert(response.data.message);
                     setSubmitted(true);
                     
                     /////////////////////////////////////////TODO:::then redirect to login page
+                    history.push({pathname: '/admin/profile'});
                 }, (error) => {
                     console.log(error);
                 });
@@ -326,7 +329,13 @@ function RegisterTeacher(){
 
       
     return <div>
-        <MyAppBar appBarTitle="Teacher registration"/>
+        <MyAppBar 
+        loggedInStatus={props.loggedInStatus} 
+        handleLogout={props.handleLogout} 
+        userInfo={props.userInfo} 
+        role={props.role} 
+        appBarTitle="Teacher Registration"
+        />
         <Container  component="main" maxWidth="md">
         <CssBaseline />
         <form style={{ width: '100%'}} noValidate>  
@@ -569,7 +578,7 @@ function RegisterTeacher(){
         </Container>
         
 
-
+        { props.role==="Admin"&&props.loggedInStatus==="LOGGED-IN" ? null : <Redirect to="/" /> }           
     </div>
 }
 
