@@ -127,17 +127,17 @@ export default function SignIn(props) {
         handleLogout={props.handleLogout} 
         userInfo={props.userInfo} 
         role={props.role} 
-        appBarTitle="Sign in page"
+        appBarTitle="Sign in"
         />
         
       <Container component="main" maxWidth="xs" >
         <CssBaseline />
-        <Grid container md spacing={3} className={classes.paper} style={{background:"#ffffff", borderRadius: 10, boxShadow: "20px 20px 50px #e5e5e5", marginTop: "100px", padding: "10px 30px", marginLeft:"auto",marginRight:"auto" }}>
+        <Grid container md spacing={3} className={classes.paper} style={{background:"#ffffff", borderRadius: 10, boxShadow: "20px 20px 50px #e5e5e5", marginTop: "6.25rem", padding: "1.3157894736842106vh 1.953125vw"}}>
         <div className={classes.paper} >
           <Avatar className={classes.avatar}>
             <AccountCircleIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h4" variant="h6">
             Sign in
           </Typography>
           <form className={classes.form} noValidate>
