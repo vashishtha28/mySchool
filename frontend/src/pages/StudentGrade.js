@@ -14,14 +14,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
 import TableFooter from '@material-ui/core/TableFooter';
 import IconButton from '@material-ui/core/IconButton';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import LastPageIcon from '@material-ui/icons/LastPage';
-import moment from 'moment';
-// import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     selectEmpty: {
@@ -39,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
     },
     container: {
-        maxHeight: 440,
+        maxHeight: '100vh',
     },
 }));
 
@@ -61,20 +56,45 @@ function createData(date, desc, maxmarks, scores) {
 }
 
 
-function createrows() {
-    const date = new Date().clone();
-    const rows = [
-        createData(date, 'UnitTest1', 50, 40),
-        createData(date, 'HalfYearly1', 100, 80),
-        createData(date, 'ClassTest1', 10, 10),
-        createData(date, 'PracticalExam1', 10, 9),
-        createData(date, 'UnitTest2', 50, 50),
-        createData(date, 'PreBoards', 100, 90),
-        createData(date, 'FullYearly', 100, 97),
-        createData(date, 'ClassTest2', 10, 9),
-        createData(date, 'PracticalExam2', 10, 10),
-    ];
+function createdate() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1;//January is 0!`
+
+    var yyyy = today.getFullYear();
+    if(dd<10){dd='0'+dd}
+    if(mm<10){mm='0'+mm}
+    var today = dd+'/'+mm+'/'+yyyy;
+    return today;
 }
+
+{/*
+    var data = ["09/06/2015", "25/06/2015", "22/06/2015", "25/07/2015", "18/05/2015"];
+
+    data.sort(function(a,b) {
+    a = a.split('/').reverse().join('');
+    b = b.split('/').reverse().join('');
+    return a > b ? 1 : a < b ? -1 : 0;
+*/}
+
+var date = createdate();
+
+
+
+const rows = [
+    createData(date, 'UnitTest1', 50, 46),
+    createData(date, 'HalfYearly1', 100, 80),
+    createData(date, 'ClassTest1', 10, 10),
+    createData(date, 'PracticalExam1', 10, 9),
+    createData(date, 'UnitTest2', 50, 50),
+    createData(date, 'PreBoards', 100, 90),
+    createData(date, 'FullYearly', 100, 97),
+    createData(date, 'FullYearly', 100, 97),
+    createData(date, 'ClassTest2', 10, 9),
+    createData(date, 'PracticalExam2', 10, 10),
+    createData(date, 'ClassTest2', 10, 9),
+    createData(date, 'PracticalExam2', 10, 10),
+];
 
 export default function GradeCard() {
     const classes = useStyles();
@@ -119,24 +139,45 @@ export default function GradeCard() {
                 </form>
             </Box>
             <h3>Date-wise Result Report</h3>
-            <Container maxWidth="lg">
+            <Container maxWidth="lg" style={{ marginBottom: '20px'  }}>
                 <Paper className={classes.root}>
                     <TableContainer className={classes.container}>
                         <Table stickyHeader aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
-                                    {
-                                        columns.map((column) => (
-                                            <TableCell key={column.id} align={column.align} style={{ minWidth: column.minWidth }}>
+                                    {   columns.map((column) => (
+                                            <TableCell key={column.id} align={column.align} style={{ minWidth: column.minWidth, fontWeight: 'bold', textDecoration: 'underline' }}>
                                                 {column.label}
                                             </TableCell>
                                     ))}
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                
+                            {rows.map((row) => {
+                                    return (
+                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.desc}> {/*add key={rows.date + student_id + rows.desc}*/}
+                                            { columns.map((column) => {
+                                                const value = row[column.id];
+                                                return (
+                                                    <TableCell key={column.id} align={column.align}>
+                                                        {column.format && typeof value==="number" ? column.format(value) : value}
+                                                    </TableCell>
+                                                );
+                                            })}
+                                        </TableRow>
+                                    )
+                                })}
                             </TableBody>
                         </Table>
+                        {/* <TablePagination
+                            rowsPerPageOptions={[6, 10, 12, 15]}
+                            component="div"
+                            count={rows.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            onChangePage={handleChangePage}
+                            onChangeRowsPerPage={handleChangeRowsPerPage}
+                        /> */}
                     </TableContainer>
                 </Paper>
             </Container>
