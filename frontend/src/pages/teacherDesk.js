@@ -29,7 +29,7 @@ function TeacherDesk(props) {
 
 
     return (
-       <div >
+       <div>
            <MyAppBar 
             loggedInStatus={props.loggedInStatus} 
             handleLogout={props.handleLogout} 

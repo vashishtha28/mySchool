@@ -73,7 +73,7 @@ const noticeSchema = new mongoose.Schema({
   date: Date,
   title: String,
   content: String,
-  sender: String
+  sender: String,
 });
 
 const testResultSchema = new mongoose.Schema({
