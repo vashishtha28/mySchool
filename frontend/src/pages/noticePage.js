@@ -28,7 +28,7 @@ export default function ViewNotice() {
 
     return (
         <div>
-            <MyAppBar appBarTitle="View Notice" />
+            <MyAppBar appBarTitle="View Notices" />
             {/** From: {sender}                            Date:{date}  DOWNBTN **/}
             {/*                              Title                               */}
             {/*                      Content of the notice                       */}
