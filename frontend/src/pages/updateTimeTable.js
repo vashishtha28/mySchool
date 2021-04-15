@@ -47,13 +47,7 @@ export default function TimeTable() {
         return {...prev, [event.target.name]: event.target.value};
     });
   };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
+ 
 
   return (
     <div>
@@ -74,15 +68,15 @@ export default function TimeTable() {
                 <Grid container style={{ justifyContent: 'space-around' }}>
                     <Grid item xs={12}  style={{ alignContent: 'right', float: 'left' }}>
                     <FormControl className={classes.formControl}>
-                      <InputLabel id="demo-controlled-open-select-label">Class</InputLabel>
+                    <InputLabel id="class">Class</InputLabel>
                       <Select
-                        labelId="demo-controlled-open-select-label"
-                        id="demo-controlled-open-select"
-                        open={open}
-                        onClose={handleClose}
-                        onOpen={handleOpen}
+                        labelId="class"
+                        id="class"
+                        name = "class"
                         value={currentClass.class}
                         onChange={handleChange}
+                        className={classes.selectEmpty}
+                        required
                       >
                         <MenuItem value="">
                           <em>None</em>
@@ -102,15 +96,15 @@ export default function TimeTable() {
                       </Select>
                     </FormControl>
                     <FormControl className={classes.formControl}>
-                      <InputLabel id="demo-controlled-open-select-label">Section</InputLabel>
+                      <InputLabel id="section">Section</InputLabel>
                       <Select
-                        labelId="demo-controlled-open-select-label"
-                        id="demo-controlled-open-select"
-                        open={open}
-                        onClose={handleClose}
-                        onOpen={handleOpen}
+                        labelId="section"
+                        id="section"
+                        name = "section"
                         value={currentClass.section}
                         onChange={handleChange}
+                        className={classes.selectEmpty}
+                        required
                       >
                         <MenuItem value="">
                           <em>None</em>

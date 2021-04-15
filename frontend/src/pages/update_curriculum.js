@@ -12,6 +12,7 @@ import Select from '@material-ui/core/Select';
 import { AppBar } from '@material-ui/core';
 import Toolbar from "@material-ui/core/Toolbar";
 import { infoStyles } from './../components/InfoBar';
+import MyAppBar from "../components/MyAppBar";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
-    color: "white",
+    //color: "white",
   },
   formControl: {
     margin: theme.spacing(1),
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Curriculum() {
+export default function Curriculum(props) {
   const classes = useStyles();
   const infoclasses = infoStyles();
   const [selectedClass, setClass] = useState('');
@@ -52,13 +53,13 @@ export default function Curriculum() {
 
   return (
     <div>
-        <AppBar position="static" style={{ backgroundColor: "#222831" }}>
-            <Toolbar>
-                <Typography variant="h6" className={classes.title}>
-                    Update Curriculum
-                </Typography>
-            </Toolbar>
-        </AppBar>
+        <MyAppBar 
+        loggedInStatus={props.loggedInStatus} 
+        handleLogout={props.handleLogout} 
+        userInfo={props.userInfo} 
+        role={props.role} 
+        appBarTitle="Update Curriculum"
+        />
         <Box style={{ backgroundColor: "#00ADB5", padding: '3.679890560875513vh', }}>
                 <Container component="main" maxWidth="md">
                 <Grid container style={{ justifyContent: 'space-around' }}>
@@ -69,7 +70,7 @@ export default function Curriculum() {
                 <Grid container style={{ justifyContent: 'space-around' }}>
                     <Grid item xs={12} sm={5} style={{ alignContent: 'right', float: 'left' }}>
                     <FormControl className={classes.formControl}>
-                      <InputLabel id="demo-controlled-open-select-label">Class</InputLabel>
+                      <InputLabel id="class-open-select-label">Class</InputLabel>
                       <Select
                         labelId="demo-controlled-open-select-label"
                         id="demo-controlled-open-select"
