@@ -51,13 +51,13 @@ export default function TimeTable() {
 
   return (
     <div>
-        <AppBar position="static" style={{ backgroundColor: "#222831" }}>
-            <Toolbar>
-                <Typography variant="h6" className={classes.title}>
-                    Update Time-Table
-                </Typography>
-            </Toolbar>
-        </AppBar>
+        <MyAppBar 
+        loggedInStatus={props.loggedInStatus} 
+        handleLogout={props.handleLogout} 
+        userInfo={props.userInfo} 
+        role={props.role} 
+        appBarTitle="Update Time-Table"
+        />
         <Box style={{ backgroundColor: "#00ADB5", padding: '3.679890560875513vh', }}>
                 <Container component="main" maxWidth="md">
                 <Grid container style={{ justifyContent: 'space-around' }}>
