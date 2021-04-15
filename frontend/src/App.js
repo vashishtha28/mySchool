@@ -10,13 +10,14 @@ import GenerateNotice from "./pages/genNotice";
 // import MyAppBar from "./components/MyAppBar"
 // import RegisterStudent from "./pages/RegisterStudent";
 // import RegisterTeacher from "./pages/RegisterTeacher";
+import Attendance from "./pages/updateAttendance";
 import Main from "./components/Main";
 
 
 function App() {
   return (
     <div className="App">
-      <Main/>
+      <Attendance/>
     </div>
   );
 }
