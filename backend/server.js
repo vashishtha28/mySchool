@@ -383,6 +383,65 @@ app.post("/checkuser", function(req, res){
   
 });
 
+app.post("/remove/user", function(req, res){
+  console.log(req.body);
+  User.exists({username:req.body.username}, function (err, doc) {
+    if (err){
+        console.log(err)
+    }
+    else{
+      if(!doc) res.send({message: "USER NOT FOUND"});
+      else{
+        if(req.body.role==="Student"){
+        StudentInfo.exists({username:req.body.username}, function(err, studDoc){
+          if(!studDoc){
+            res.send({message: "There is no such student."});
+          }
+          else{
+            StudentInfo.deleteOne({ username: req.body.username }).then(function(){
+              console.log("Student Info deleted"); // Success
+              //also delete user credentials
+              User.deleteOne({ username: req.body.username }).then(function(){
+                console.log("student credentials deleted"); // Success
+                res.send({message: "SUCCESS"});
+              }).catch(function(error){
+                console.log(error); // Failure
+              });
+            }).catch(function(error){
+              console.log(error); // Failure
+          });
+          }
+        })
+
+      }
+
+      else if(req.body.role==="Teacher"){
+        TeacherInfo.exists({username:req.body.userName}, function(err, teaDoc){
+          if(!teaDoc){
+            res.send({message: "There is no such teacher."});
+          }
+          else{
+            TeacherInfo.deleteOne({ username: req.body.userName }).then(function(){
+              console.log("Teacher Info deleted"); // Success
+              //also delete user credentials
+              User.deleteOne({ username: req.body.userName }).then(function(){
+                console.log("Teacher credentials deleted"); // Success
+                res.send({message: "SUCCESS"});
+              }).catch(function(error){
+                console.log(error); // Failure
+              });
+            }).catch(function(error){
+              console.log(error); // Failure
+            });
+          }
+        });
+      }
+    }
+  }
+
+      });
+    });
+
 
 
 

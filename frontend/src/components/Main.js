@@ -9,6 +9,7 @@ import RegisterStudent from '../pages/RegisterStudent';
 import RegisterTeacher from '../pages/RegisterTeacher';
 import UpdateTimeTable from '../pages/updateTimeTable';
 import UpdateCurriculum from '../pages/update_curriculum';
+import Remove from "../pages/remove";
 import server_url from './ServerLink';
 
 const Main = () => {
@@ -121,6 +122,17 @@ const Main = () => {
          path="/register/teacher" 
          render = {props =>(
           <RegisterTeacher 
+            {...props} 
+            handleLogout={handleLogout} 
+            loggedInStatus={globalData.loggedInStatus} 
+            userInfo={globalData.user} 
+            role={globalData.role}/>
+        )}></Route>
+        <Route 
+        exact 
+        path='/remove/user' 
+        render = {props =>(
+          <Remove 
             {...props} 
             handleLogout={handleLogout} 
             loggedInStatus={globalData.loggedInStatus} 

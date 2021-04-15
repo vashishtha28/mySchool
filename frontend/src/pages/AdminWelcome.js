@@ -58,6 +58,11 @@ export default function AdminPage(props) {
     history.push("/register/teacher");
   }
 
+  function handleRemoveUser(){
+    console.log("Clicked");
+    history.push("/remove/user");
+  }
+
   return (
 
     <div className={classes.root}>
@@ -70,33 +75,29 @@ export default function AdminPage(props) {
         role={props.role} 
         appBarTitle="Admin"
         />
-      <h1>{props.loggedInStatus}</h1>
 
       <Container component="main" maxWidth="md" style={{ marginTop: "10%"}}>
       <Grid container spacing={3}>
-        <Grid item xs={6}>
-          <Paper className={classes.paper} style={{ background: "#00B594"}} onClick={handleAddStudent} >Add Student</Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper className={classes.paper} style={{ background: "#E96565"}}>Remove Student</Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper className={classes.paper} style={{ background: "#00B594"}} onClick={handleAddTeacher}>Add Teacher</Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper className={classes.paper} style={{ background: "#E96565"}}>Remove teacher</Paper>
+        <Grid item xs={12}>
+          <Button className={classes.paper} style={{ background: "#00B594", width:"100%"}} onClick={handleAddStudent} >Add Student</Button>
         </Grid>
         <Grid item xs={12}>
-          <Paper className={classes.paper} style={{ background: "#0097EC"}}>Update Teacher's Time Table</Paper>
+          <Button className={classes.paper} style={{ background: "#00B594", width:"100%"}} onClick={handleAddTeacher}>Add Teacher</Button>
         </Grid>
         <Grid item xs={12}>
-          <Paper className={classes.paper} style={{ background: "#0097EC"}}>Update Students's Time Table</Paper>
+          <Button className={classes.paper} style={{ background: "#E96565", width:"100%"}} onClick={handleRemoveUser}>Remove Student / Teacher</Button>
         </Grid>
         <Grid item xs={12}>
-          <Paper className={classes.paper} style={{ background: "#0097EC"}}>Update Curriculum</Paper>
+          <Button className={classes.paper} style={{ background: "#0097EC", width:"100%"}}>Update Teacher's Time Table</Button>
         </Grid>
         <Grid item xs={12}>
-          <Paper className={classes.paper} style={{ background: "#010207"}}>Generate Notice</Paper>
+          <Button className={classes.paper} style={{ background: "#0097EC", width:"100%"}}>Update Students's Time Table</Button >
+        </Grid>
+        <Grid item xs={12}>
+          <Button className={classes.paper} style={{ background: "#0097EC", width:"100%"}}>Update Curriculum</Button>
+        </Grid>
+        <Grid item xs={12}>
+          <Button className={classes.paper} style={{ background: "#010207", width:"100%"}}>Generate Notice</Button>
         </Grid>
       </Grid>
       </Container>
