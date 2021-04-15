@@ -12,7 +12,7 @@ import Select from '@material-ui/core/Select';
 import { AppBar } from '@material-ui/core';
 import Toolbar from "@material-ui/core/Toolbar";
 import { infoStyles } from './../components/InfoBar';
-
+import MyAppBar from "../components/MyAppBar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function TimeTable() {
+export default function TimeTable(props) {
   const classes = useStyles();
   const infoclasses = infoStyles();
   const [currentClass, setClass] = useState({

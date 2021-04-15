@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Redirect, useHistory} from "react-router-dom";
+import Button from '@material-ui/core/Button';
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import MyAppBar from "../components/MyAppBar";
 import Container from '@material-ui/core/Container';
@@ -66,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
     }
     
   });
+
  
 export default function Attendance(props){
 
@@ -98,6 +100,10 @@ export default function Attendance(props){
       });
     };
     const [selectedDate, setSelectedDate] = React.useState(new Date());
+    function handleSubmit(event){
+      event.preventDefault();
+      console.log("Success");
+     }
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -114,7 +120,7 @@ export default function Attendance(props){
                 <Container component="main" maxWidth="md">
                 <Grid container style={{ justifyContent: 'space-around' }}>
                     <Grid item xs={12}>
-                        <h3>Select the Class and Section to update its Time Table</h3>
+                        <h3>Please select the Class, Section and Date to update the attendance!</h3>
                     </Grid>
                 </Grid>
                 <Grid container style={{ justifyContent: 'space-around' }}>
@@ -222,7 +228,31 @@ export default function Attendance(props){
             </Grid>
             </Container>
             </div>
-    
+      <div>
+      <Container component="main" maxWidth="md">
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          onClick={handleSubmit}
+          style={{padding: "10px", background:"#00B594", width:"30%", margin:"0.625rem"}}
+        >
+                Save
+        </Button>
+        <Button
+          type="submit"
+          //fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          onClick={handleSubmit}
+          style={{padding: "10px", background:"#E96565", width:"30%", margin:"0.625rem"}}
+        >
+                Discard
+        </Button>
+        </Container>
+      </div>
     </div>
 
 }
