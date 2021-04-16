@@ -440,7 +440,21 @@ app.post("/remove/user", function(req, res){
   }
 
       });
-    });
+});
+
+app.post("/class/student/list", function(req, res){
+  console.log(req.body);
+  StudentInfo.find({class: req.body.class, section: req.body.section}, function(err, students){
+    if(err){console.log(err);
+      res.send({message:"FAILED", studentList:[]});
+    }
+    else{
+      res.send({message:"SUCCESS", studentList:students});
+    }
+
+  });
+
+});
 
 
 

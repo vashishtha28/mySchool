@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './../infobar.css';
 import { useStyles } from './../components/MyAppBar';
-import {Redirect} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import Toolbar from "@material-ui/core/Toolbar";
 import { AppBar, Box } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography";
@@ -14,6 +14,7 @@ import MyAppBar from "../components/MyAppBar";
 
 function TeacherDesk(props) {
     const classes = useStyles();
+    const history = useHistory();
     const infoclasses = infoStyles();
     const [subjectList, setSubjectList] = useState([]);
     const [classList, setClassList] = useState([]);
@@ -92,9 +93,9 @@ function TeacherDesk(props) {
             <Container maxWidth="sm" style={{ color: 'white', marginTop: '20px'}}>
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
-                    <Button variant="contained" style={{ color: 'white', backgroundColor: '#DF93FF', width: '500px', fontSize: '17px' }}>
+                    {classTeacherOf.class!==""&&classTeacherOf.section!==""&&<Button variant="contained" style={{ color: 'white', backgroundColor: '#DF93FF', width: '500px', fontSize: '17px' }} onClick={()=>{history.push("/update/attendance")}}>
                         Update Attendance
-                    </Button>
+                    </Button>}
                     </Grid>
                     <Grid item xs={12}>
                     <Button variant="contained" style={{ color: 'white', backgroundColor: '#E96565', width: '500px', fontSize: '17px' }}>

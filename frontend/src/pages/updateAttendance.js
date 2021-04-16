@@ -26,6 +26,8 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import { TextField } from '@material-ui/core';
+import axios from 'axios';
+import server_url from '../components/ServerLink';
 
 const useStyles = makeStyles((theme) => ({
     
@@ -72,8 +74,31 @@ const useStyles = makeStyles((theme) => ({
 export default function Attendance(props){
 
     const classes = useStyles();
-    const studentList = ["Vatsal Sinha", "Vashishtha Shukla", "Ujjwal Rustagi", "Gaurav Trivedi", "Raj Samal", "Alia Bhatt"];
-    const [checkedStudent, setCheckedStudent] = useState([]);
+    const [studentInfoList, setStudentInfoList] = useState([]);
+    const [studentList, setStudentList] = useState([]);
+    const [classTeacherOf, setClassTeacherOf] = useState({class:"", section:""});
+    const [checkedStudent, setCheckedStudent] = useState([]); // Dekh lena isko
+
+    useEffect(async ()=>{
+      await setClassTeacherOf((prev)=>{
+        const temp = prev;
+        temp.class = props.userInfo.classTeacherOf.class;
+        temp.section = props.userInfo.classTeacherOf.section;
+        return temp;
+      });
+      axios.post(server_url+"/class/student/list", classTeacherOf)
+      .then((response)=>{
+        console.log(response.data.studentList);
+        setStudentInfoList(response.data.studentList);
+        setCheckedStudent(response.data.studentList);
+      },(error) => {
+        console.log(error);
+      });
+
+    }, []);
+
+
+
     const handleToggle = (value) => async () => {
         const currentIndex = checkedStudent.indexOf(value);
         const newChecked = [...checkedStudent];
@@ -124,58 +149,7 @@ export default function Attendance(props){
                     </Grid>
                 </Grid>
                 <Grid container style={{ justifyContent: 'space-around' }}>
-                    <Grid item xs={12}  style={{ alignContent: 'right', float: 'left' }}>
-                    <FormControl className={classes.formControl}>
-                    <InputLabel id="class">Class</InputLabel>
-                      <Select
-                        labelId="class"
-                        id="class"
-                        name = "class"
-                        value={currentClass.class}
-                        onChange={handleChange}
-                        className={classes.selectEmpty}
-                        required
-                      >
-                        <MenuItem value="">
-                          <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={"1"}>1</MenuItem>
-                        <MenuItem value={"2"}>2</MenuItem>
-                        <MenuItem value={"3"}>3</MenuItem>
-                        <MenuItem value={"4"}>4</MenuItem>
-                        <MenuItem value={"5"}>5</MenuItem>
-                        <MenuItem value={"6"}>6</MenuItem>
-                        <MenuItem value={"7"}>7</MenuItem>
-                        <MenuItem value={"8"}>8</MenuItem>
-                        <MenuItem value={"9"}>9</MenuItem>
-                        <MenuItem value={"10"}>10</MenuItem>
-                        <MenuItem value={"11"}>11</MenuItem>
-                        <MenuItem value={"12"}>12</MenuItem>
-                      </Select>
-                    </FormControl>
-                    <FormControl className={classes.formControl}>
-                    <InputLabel id="section">Section</InputLabel>
-                      <Select
-                        labelId="section"
-                        id="section"
-                        name = "section"
-                        value={currentClass.section}
-                        onChange={handleChange}
-                        className={classes.selectEmpty}
-                        required
-                      >
-                        <MenuItem value="">
-                          <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={"A"}>A</MenuItem>
-                        <MenuItem value={"B"}>B</MenuItem>
-                        <MenuItem value={"C"}>C</MenuItem>
-                        <MenuItem value={"D"}>D</MenuItem>
-                        <MenuItem value={"E"}>E</MenuItem>
-                        <MenuItem value={"F"}>F</MenuItem>
-                      </Select>
-                    </FormControl>
-                
+                    <Grid item xs={12}  style={{ alignContent: 'right', float: 'left' }}>                
                     <ThemeProvider theme={theme}>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <KeyboardDatePicker
@@ -183,7 +157,7 @@ export default function Attendance(props){
                       margin="normal"
                       variant="inline"
                       id="date-picker-dialog"
-                      label="Date picker"
+                      label="Attendance for Date"
                       format="dd/MM/yyyy"
                       value={selectedDate}
                       onChange={handleDateChange}
@@ -208,11 +182,13 @@ export default function Attendance(props){
                     Please update the attendance!
                 </Typography>
                 <hr/>
-                {studentList.map((value) => {
+                {studentInfoList.map((value) => {
                     const labelId = `checkbox-list-secondary-label-${value}`;
                     return (
                     <ListItem key={value} button>
-                        <ListItemText id={labelId} primary={value} />
+                    
+                        <ListItemText id={labelId} primary={value.rollNum} />
+                        <ListItemText id={labelId} primary={value.studentName} />
                         <ListItemSecondaryAction>
                         <Checkbox
                             edge="end"
@@ -251,8 +227,10 @@ export default function Attendance(props){
         >
                 Discard
         </Button>
-        </Container>
+        </Container>   
       </div>
+      
+      { props.role==="Teacher" && props.loggedInStatus==="LOGGED-IN" ? null : <Redirect to="/" /> } 
     </div>
 
 }
