@@ -145,7 +145,7 @@ export default function Attendance(props){
                 <Container component="main" maxWidth="md">
                 <Grid container style={{ justifyContent: 'space-around' }}>
                     <Grid item xs={12}>
-                        <h3>Please select the Class, Section and Date to update the attendance!</h3>
+                        <h3>Please update the attendance of your assigned class!</h3>
                     </Grid>
                 </Grid>
                 <Grid container style={{ justifyContent: 'space-around' }}>
