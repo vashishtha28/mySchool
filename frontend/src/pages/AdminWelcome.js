@@ -63,6 +63,10 @@ export default function AdminPage(props) {
     history.push("/remove/user");
   }
 
+  function handleGenerateNotice(){
+    history.push("/generate/notice");
+  }
+
   return (
 
     <div className={classes.root}>
@@ -91,13 +95,13 @@ export default function AdminPage(props) {
           <Button className={classes.paper} style={{ background: "#0097EC", width:"100%"}}>Update Teacher's Time Table</Button>
         </Grid>
         <Grid item xs={12}>
-          <Button className={classes.paper} style={{ background: "#0097EC", width:"100%"}}>Update Students's Time Table</Button >
+          <Button className={classes.paper} style={{ background: "#0097EC", width:"100%"}}>Update Students's Time Table</Button>
         </Grid>
         <Grid item xs={12}>
           <Button className={classes.paper} style={{ background: "#0097EC", width:"100%"}}>Update Curriculum</Button>
         </Grid>
         <Grid item xs={12}>
-          <Button className={classes.paper} style={{ background: "#010207", width:"100%"}}>Generate Notice</Button>
+          <Button className={classes.paper} style={{ background: "#010207", width:"100%"}} onClick={handleGenerateNotice}>Generate Notice</Button>
         </Grid>
       </Grid>
       </Container>

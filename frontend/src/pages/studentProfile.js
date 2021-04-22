@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import './../infobar.css';
 import MyAppBar, { useStyles } from './../components/MyAppBar';
 import Toolbar from "@material-ui/core/Toolbar";
@@ -14,7 +14,12 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 function StudentProfile(props) {    
     const classes = useStyles();
+    const history = useHistory();
     const infoclasses = infoStyles();
+
+    function handleNotice(){
+        history.push("/view/notice");
+    }
 
     return (
         <div>
@@ -89,7 +94,7 @@ function StudentProfile(props) {
                         </Paper>
                     </Grid>
                     <Grid item xs={6} sm={4}>
-                        <Paper classes={infoclasses.paper} style={{ backgroundColor:"#010207", color:'#fff', padding: '15px', fontSize: '20px', fontWeight: '600' }}>
+                        <Paper classes={infoclasses.paper} style={{ backgroundColor:"#010207", color:'#fff', padding: '15px', fontSize: '20px', fontWeight: '600' }} onClick = {handleNotice}>
                             <img src="https://img.icons8.com/color/110/000000/alarm.png"/>
                             <br></br>
                             Notice

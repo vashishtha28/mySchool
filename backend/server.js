@@ -70,11 +70,12 @@ const classSchema = new mongoose.Schema({
 const Class = new mongoose.model("Class", classSchema);
 
 const noticeSchema = new mongoose.Schema({
-  date: Date,
+  date: String,
   title: String,
   content: String,
   sender: String,
 });
+const Notice = new mongoose.model("Notice", noticeSchema);
 
 const testResultSchema = new mongoose.Schema({
   date: Date,
@@ -456,6 +457,52 @@ app.post("/class/student/list", function(req, res){
 
 });
 
+app.post("/generate/student/notice", async function(req, res){
+  console.log(req.body);
+  const notice = new Notice;
+  notice.date = req.body.date;
+  notice.title = req.body.title;
+  notice.content = req.body.body;
+  notice.sender = req.body.sender;
+
+  if(req.body.class==="All"){
+    StudentInfo.updateMany({}, 
+      { $addToSet: { notices: notice} }, function (err, docs) {
+      if (err){
+          console.log(err)
+      }
+      else{
+          console.log("Updated Docs : ", docs);
+      }
+  });
+  }
+  else if(req.body.section==="All"){
+    StudentInfo.updateMany({class: req.body.class}, 
+      { $addToSet: { notices: notice} }, function (err, docs) {
+      if (err){
+          console.log(err)
+      }
+      else{
+          console.log("Updated Docs : ", docs);
+      }
+  });
+  }
+
+  else{
+    StudentInfo.updateMany({class: req.body.class, section: req.body.section}, 
+      { $addToSet: { notices: notice} }, function (err, docs) {
+      if (err){
+          console.log(err)
+      }
+      else{
+          console.log("Updated Docs : ", docs);
+      }
+  });
+  }
+  res.send({message: "received notice"});
+
+
+});
 
 
 

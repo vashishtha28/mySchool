@@ -10,6 +10,8 @@ import RegisterTeacher from '../pages/RegisterTeacher';
 import UpdateTimeTable from '../pages/updateTimeTable';
 import UpdateCurriculum from '../pages/update_curriculum';
 import UpdateAttendance from "../pages/updateAttendance";
+import GenerateNotice from "../pages/genNotice";
+import ViewNotice from "../pages/noticePage";
 import Remove from "../pages/remove";
 import server_url from './ServerLink';
 
@@ -141,6 +143,31 @@ const Main = () => {
             userInfo={globalData.user} 
             role={globalData.role}/>
         )}></Route>
+
+        <Route 
+        exact 
+        path='/generate/notice' 
+        render = {props =>(
+          <GenerateNotice 
+            {...props} 
+            handleLogout={handleLogout} 
+            loggedInStatus={globalData.loggedInStatus} 
+            userInfo={globalData.user} 
+            role={globalData.role}/>
+        )}></Route>
+
+        <Route 
+        exact 
+        path='/view/notice' 
+        render = {props =>(
+          <ViewNotice 
+            {...props} 
+            handleLogout={handleLogout} 
+            loggedInStatus={globalData.loggedInStatus} 
+            userInfo={globalData.user} 
+            role={globalData.role}/>
+        )}></Route>
+
         <Route
          exact 
          path="/update/attendance" 
