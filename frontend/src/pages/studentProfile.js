@@ -78,23 +78,23 @@ function StudentProfile(props) {
                 </Container>
             </Box>
             <Container maxWidth="md" style={{color: 'white', display: 'flex', marginBottom: '21px', marginTop: '12px'}}>
-                <Grid container spacing={3} style={{ justifyContent: 'space-evenly', alignContent: 'center' }}>
+                <Grid container spacing={3} style={{ justifyContent: 'space-evenly', alignContent: 'center', marginTop:"10px"  }}>
                     <Grid item xs={6} sm={4}>
-                        <Paper classes={infoclasses.paper} style={{ backgroundColor:"#C293FF", color:'#fff', padding: '15px', fontSize: '20px', fontWeight: '600'}}>
+                        <Paper classes={infoclasses.paper} style={{ backgroundColor:"#C293FF", color:'#fff', padding: '15px', fontSize: '20px', fontWeight: '600', borderRadius:"20px"}}>
                             <img src="https://img.icons8.com/color/110/000000/inspection.png"/>
                             <br></br>
                             Attendance
                         </Paper>
                     </Grid>
                     <Grid item xs={6} sm={4}>
-                        <Paper classes={infoclasses.paper} style={{ backgroundColor:"#E96565", color:'#fff', padding: '15px', fontSize: '20px', fontWeight: '600' }}>
+                        <Paper classes={infoclasses.paper} style={{ backgroundColor:"#E96565", color:'#fff', padding: '15px', fontSize: '20px', fontWeight: '600', borderRadius:"20px" }}>
                             <img src="https://img.icons8.com/color/110/000000/warranty-card.png"/>
                             <br></br>
                             Grade Card
                         </Paper>
                     </Grid>
                     <Grid item xs={6} sm={4}>
-                        <Paper classes={infoclasses.paper} style={{ backgroundColor:"#010207", color:'#fff', padding: '15px', fontSize: '20px', fontWeight: '600' }} onClick = {handleNotice}>
+                        <Paper classes={infoclasses.paper} style={{ backgroundColor:"#010207", color:'#fff', padding: '15px', fontSize: '20px', fontWeight: '600', borderRadius:"20px" }} onClick = {handleNotice}>
                             <img src="https://img.icons8.com/color/110/000000/alarm.png"/>
                             <br></br>
                             Notice
@@ -103,16 +103,16 @@ function StudentProfile(props) {
                 </Grid>
             </Container>
             <Container maxWidth="md" style={{color: 'white', display: 'flex' }}>
-                <Grid container spacing={3} style={{ justifyContent: 'space-evenly' }}>
+                <Grid container spacing={3} style={{ justifyContent: 'space-evenly'}}>
                     <Grid item xs={6} sm={4}>
-                        <Paper classes={infoclasses.paper} style={{ backgroundColor:"#00B594", color:'#fff', padding: '15px', fontSize: '20px', fontWeight: '600' }}>
+                        <Paper classes={infoclasses.paper} style={{ backgroundColor:"#00B594", color:'#fff', padding: '15px', fontSize: '20px', fontWeight: '600', borderRadius:"20px" }}>
                             <img src="https://img.icons8.com/color/110/000000/overtime.png"/>
                             <br></br>
                             Time Table
                         </Paper>
                     </Grid>
                     <Grid item xs={6} sm={4}>
-                        <Paper classes={infoclasses.paper} style={{ backgroundColor:"#F8DE5B", color:'#fff', padding: '15px', fontSize: '20px', fontWeight: '600' }}>
+                        <Paper classes={infoclasses.paper} style={{ backgroundColor:"#F8DE5B", color:'#fff', padding: '15px', fontSize: '20px', fontWeight: '600', borderRadius:"20px" }}>
                             <img src="https://img.icons8.com/color/110/000000/book-shelf.png"/>
                             <br></br>
                             Curriculum
