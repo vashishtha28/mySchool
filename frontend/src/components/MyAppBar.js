@@ -75,13 +75,16 @@ export const useStyles = makeStyles((theme) => ({
     }
   }
 
+    function handleHome () {
+      history.push('/');
+    }
     
     return <div className={classes.root}>
           <AppBar position="static" style={{ backgroundColor: "#222831" }}>
               <Toolbar style = {{justifyContent: 'space-between'}}>
                   <Typography variant="h5" className={classes.title} style={{ paddingTop: '10px', paddingBottom: '1px' }}>
                   {/* <img src="https://i.ibb.co/6J1kdpx/image-7.png" /> */}
-                  <img src="https://i.ibb.co/M2JDQmC/logo1.png" />
+                  <img src="https://i.ibb.co/M2JDQmC/logo1.png" onClick={handleHome} style={{ cursor: 'pointer' }}/>
                   {/* <img src="https://i.ibb.co/VqC3FvN/logo.png" /> */}
                   </Typography>
                   <Typography variant="h6" className={classes.title}>

@@ -245,8 +245,8 @@ export default function GenerateNotice(props) {
                 <Container maxWidth="lg" style={{ marginTop: '12px', maarginBottom: '12px' }}>
                     <Grid container spacing={3} style={{ justifyContent: 'space-around',}}>
                                 
-                    {isEmpty && <Typography style={{color:"red"}}>** FAILED: Some fields were left empty. Please fill them. **</Typography>}
-                    {submitted && <Typography variant="h5" style={{color:"Green"}}><strong>Notice Sent</strong></Typography>}
+                    {isEmpty && <Typography style={{color:"red", marginTop: "1.3vh"}}>** FAILED: Some fields were left empty. Please fill them. **</Typography>}
+                    {submitted && <Typography variant="h5" style={{color:"Green", marginTop: "1.3vh"}}><strong>Notice Sent</strong></Typography>}
                         <Grid item xs={12}>
                             <TextField id="filled-basic" label="Notice Title" name="title" value = {notice.title} onChange = {handleNoticeChange} variant="filled" style={{ width: '100%' }}/>
                         </Grid>

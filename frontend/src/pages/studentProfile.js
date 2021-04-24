@@ -29,6 +29,7 @@ function StudentProfile(props) {
                 userInfo={props.userInfo} 
                 role={props.role} 
                 appBarTitle="Student's Profile"
+                
             />
             {/* <h1>{props.userInfo.studentName}</h1> */}
             <div>

@@ -68,27 +68,24 @@ function createdate() {
     return today;
 }
 
-{/*
-    var data = ["09/06/2015", "25/06/2015", "22/06/2015", "25/07/2015", "18/05/2015"];
+    // var data = ["09/06/2015", "25/06/2015", "22/06/2015", "25/07/2015", "18/05/2015"];
 
-    data.sort(function(a,b) {
-    a = a.split('/').reverse().join('');
-    b = b.split('/').reverse().join('');
-    return a > b ? 1 : a < b ? -1 : 0;
-*/}
+    // data.sort(function(a,b) {
+    //     a = a.split('/').reverse().join('');
+    //     b = b.split('/').reverse().join('');
+    //     return a > b ? 1 : a < b ? -1 : 0;
+    // };
 
 var date = createdate();
-
-
 
 const rows = [
     createData(date, 'UnitTest1', 50, 46),
     createData(date, 'HalfYearly1', 100, 80),
     createData(date, 'ClassTest1', 10, 10),
-    createData(date, 'PracticalExam1', 10, 9),
+    createData('20/04/2021', 'PracticalExam1', 10, 9),
     createData(date, 'UnitTest2', 50, 50),
     createData(date, 'PreBoards', 100, 90),
-    createData(date, 'FullYearly', 100, 97),
+    createData('2/04/2021', 'FullYearly', 100, 97),
     createData(date, 'FullYearly', 100, 97),
     createData(date, 'ClassTest2', 10, 9),
     createData(date, 'PracticalExam2', 10, 10),
@@ -100,21 +97,21 @@ export default function GradeCard() {
     const classes = useStyles();
     const [subject, setSubject] = useState('');
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(6);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
 
     function handleSubjectChange(event) {
         event.preventDefault();
         setSubject(event.target.value);
     }
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
+    // const handleChangePage = (event, newPage) => {
+    //     setPage(newPage);
+    // };
 
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
+    // const handleChangeRowsPerPage = (event) => {
+    //     setRowsPerPage(parseInt(event.target.value, 10));
+    //     setPage(0);
+    // };
 
     return (
         <div>
@@ -169,8 +166,9 @@ export default function GradeCard() {
                                 })}
                             </TableBody>
                         </Table>
-                        {/* <TablePagination
-                            rowsPerPageOptions={[6, 10, 12, 15]}
+                    </TableContainer>
+                    {/* <TablePagination
+                            rowsPerPageOptions={[5, 10, 15]}
                             component="div"
                             count={rows.length}
                             rowsPerPage={rowsPerPage}
@@ -178,9 +176,11 @@ export default function GradeCard() {
                             onChangePage={handleChangePage}
                             onChangeRowsPerPage={handleChangeRowsPerPage}
                         /> */}
-                    </TableContainer>
                 </Paper>
             </Container>
+
+            
+
         </div>  
     );
 }

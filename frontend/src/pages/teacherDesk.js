@@ -27,7 +27,9 @@ function TeacherDesk(props) {
             await setClassTeacherOf(props.userInfo.classTeacherOf);
     }, []);
 
-
+    function handleGenerateNotice(){
+        history.push("/generate/notice");
+    }
 
     return (
        <div>
@@ -118,7 +120,7 @@ function TeacherDesk(props) {
                     </Button>
                     </Grid>
                     <Grid item xs={12}>
-                    <Button variant="contained" style={{ color: 'white', backgroundColor: '#F8DE5B', width: '500px', fontSize: '17px' }}>
+                    <Button variant="contained" style={{ color: 'white', backgroundColor: '#F8DE5B', width: '500px', fontSize: '17px' }} onClick={ handleGenerateNotice }>
                         Generate Notice
                     </Button>
                     </Grid>
