@@ -33,6 +33,7 @@ function TeacherDesk(props) {
 
     return (
        <div>
+           {/*MyAppBar for teacher desk.*/}
            <MyAppBar 
             loggedInStatus={props.loggedInStatus} 
             handleLogout={props.handleLogout} 
@@ -41,6 +42,7 @@ function TeacherDesk(props) {
             appBarTitle="Teacher's Profile"
             />
             {/* <h1>{props.loggedInStatus}</h1> */}
+            {/*Details of Teacher*/}
             <Box style={{ backgroundColor: "#00ADB5", padding: '3.679890560875513vh', }}>
                 <Container component="main" maxWidth="md" >
                 <Grid container style={{ justifyContent: 'space-around' }}>
@@ -92,6 +94,7 @@ function TeacherDesk(props) {
                 </Grid>
                 </Container>
             </Box>
+            {/*Teacher Activity*/}
             <Container maxWidth="sm" style={{ color: 'white', marginTop: '20px'}}>
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
