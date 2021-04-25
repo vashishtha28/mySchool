@@ -12,6 +12,8 @@ import GenerateNotice from "./pages/genNotice";
 // import RegisterTeacher from "./pages/RegisterTeacher";
 import Attendance from "./pages/updateAttendance";
 import Main from "./components/Main";
+import Grades from "./pages/updateGrades";
+
 
 
 function App() {
