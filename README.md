@@ -24,4 +24,22 @@ In order to run the website please follow the mentioned guidelines:
 <ol>
   <li> Clone the repository onto your personal computer.
   <li> If using windows, we recommend installing Hyper (an electron-based terminal). If using Mac/linux, the native terminal would be fine.
-    Please install hyper using this link :- <a href="https://hyper.is/"> Click Here </a>
+    Please install hyper using this link :- <a href="https://hyper.is/"> Click Here </a></li>
+  <li> Please install node on your system using this link: https://nodejs.org/en/ </li>
+  <li> Please install nodemon on your system using this link: https://www.npmjs.com/package/nodemon </li>
+  <li> Please install npm in the frontend folder using the command "npm install" </li>
+  <li> Please install npm in the backend folder using the command "npm install" </li>
+  <li> Please setup your own mongoDB on your system as the password for the database cannot be provided with the repository. </li>
+  <li> Please create a .env file and add your corresponding MONGO_URL and SESSION_SECRET in the file </li>
+  <li> Congrats! Now you can run the website on your pc.
+    
+### Instructions for starting the website:
+<ol>
+  <li> Please open the terminal and move into the mySchool directory. 
+  <li> Move into the backend directory and start the backend server on port 5000 by running the command: "nodemon server.js" </li>
+  <li> Open a new terminal tab and move into the frontend directory and start the React app by running the command: "npm start" </li>
+  <li> Now you can test and explore the website in your favourite browser.</li>
+</ol>
+   <img src="https://ibb.co/mzMFSYx" alt="terminal image" width="500" height="400">
+   <img src="https://ibb.co/p4zxtKK" alt="terminal image" width="500" height="400">
+
