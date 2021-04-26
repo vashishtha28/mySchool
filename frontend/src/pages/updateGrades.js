@@ -102,17 +102,17 @@ export default function Grades(props){
         },
         {
             "roll": "2",
-            "name": "Alia Bhatt",
+            "name": "Vashishtha Shukla",
             "grade": ""
         },
         {
             "roll": "3",
-            "name": "Jacqueline Fernandez",
+            "name": "Ujjwal Rustagi",
             "grade": ""
         },
         {
             "roll": "4",
-            "name": "Disha Patani",
+            "name": "Raj Samal",
             "grade": ""
         },
     ]
