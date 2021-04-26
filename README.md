@@ -47,7 +47,6 @@ In order to run the website please follow the mentioned guidelines:
    <img src="screenshots/ss3.png" height="300" width="400">
    <img src="screenshots/ss4.png" height="300" width="400">
    <img src="screenshots/ss5.png" height="300" width="400">
-   <img src="screenshots/ss5.png" height="300" width="400">
    <img src="screenshots/ss6.png" height="300" width="400">
    <img src="screenshots/ss7.png" height="300" width="400">
    <img src="screenshots/ss8.png" height="300" width="400">
