@@ -62,7 +62,7 @@ In order to run the website please follow the mentioned guidelines:
    <img src="screenshots/ss18.png" height="600" width="800">
    
    Please note that the site is completely responsive. It works flawless in all sorts of devices including android mobiles, iphones, iPads, tablelts, laptops and  large computers. Attached is the screenshot of the website in iPhone X:
-   <img src="screenshots/final.png" height="600" width="800">
+   <img src="screenshots/final.png" height="601" width="800">
    
 
 
