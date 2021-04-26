@@ -44,6 +44,9 @@ In order to run the website please follow the mentioned guidelines:
    <img src="screenshots/ss2.png" height="300" width="400">
 
 ### Screenshots of the website:
+   <img src="screenshots/ss3.png" height="300" width="400">
+   <img src="screenshots/ss4.png" height="300" width="400">
+   <img src="screenshots/ss5.png" height="300" width="400">
    <img src="screenshots/ss5.png" height="300" width="400">
    <img src="screenshots/ss6.png" height="300" width="400">
    <img src="screenshots/ss7.png" height="300" width="400">
@@ -57,9 +60,10 @@ In order to run the website please follow the mentioned guidelines:
    <img src="screenshots/ss15.png" height="300" width="400">
    <img src="screenshots/ss16.png" height="300" width="400">
    <img src="screenshots/ss17.png" height="300" width="400">
+   <img src="screenshots/ss18.png" height="300" width="400">
    
    Please note that the site is completely responsive. It works flawless in all sorts of devices including android mobiles, iphones, iPads, tablelts, laptops and  large computers. Attached is the screenshot of the website in iPhone X:
-   <img src="screenshots/ss18.png" height="300" width="400">
+   <img src="screenshots/final.png" height="300" width="400">
    
 
 
