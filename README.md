@@ -40,6 +40,6 @@ In order to run the website please follow the mentioned guidelines:
   <li> Open a new terminal tab and move into the frontend directory and start the React app by running the command: "npm start" </li>
   <li> Now you can test and explore the website in your favourite browser.</li>
 </ol>
-   <img src="https://ibb.co/mzMFSYx" alt="terminal image" width="500" height="400">
-   <img src="https://ibb.co/p4zxtKK" alt="terminal image" width="500" height="400">
+   <img src="screenshots/ss1.png" height="300" width="400">
+   <img src="screenshots/ss2.png" height="300" width="400">
 
