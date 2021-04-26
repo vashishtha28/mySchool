@@ -32,6 +32,7 @@ In order to run the website please follow the mentioned guidelines:
   <li> Please setup your own mongoDB on your system as the password for the database cannot be provided with the repository. </li>
   <li> Please create a .env file and add your corresponding MONGO_URL and SESSION_SECRET in the file </li>
   <li> Congrats! Now you can run the website on your pc.
+</ol>
     
 ### Instructions for starting the website:
 <ol>
