@@ -23,19 +23,19 @@ export default function StudentAttendance(props) {
                         Classes held:
                     </Grid>
                     <Grid item xs={6} md={2} style={{ textAlign: 'left' }}>
-                        123
+                        27
                     </Grid>
                     <Grid item xs={6} md={2} style={{ textAlign: 'right' }}>
                         Classes attended:
                     </Grid>
                     <Grid item xs={6} md={2} style={{ textAlign: 'left' }}>
-                        120
+                        24
                     </Grid>
                     <Grid item xs={6} md={2} style={{ textAlign: 'right' }}>
                         Attendance:
                     </Grid>
                     <Grid item xs={6} md={2} style={{ textAlign: 'left' }}>
-                        97.56% 
+                        88.88% 
                         {/* 
                             Attendance = (attendedClasses/heldClasses)*100
                         */}

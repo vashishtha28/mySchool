@@ -4,6 +4,7 @@
   --white: rgb(240, 240, 240);
   --red: rgb(206, 36, 36);
   --light-blue: rgb(102, 193, 255);
+  --orange: rgb(226, 74, 28);
   color: var(--black);
   font-size: 16px;
   text-rendering: optimizeLegibility;

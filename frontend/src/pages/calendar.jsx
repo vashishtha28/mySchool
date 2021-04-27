@@ -51,11 +51,24 @@ export default function Calendar() {
         return day.isSame(new Date(), "day");
     }
 
-    function dayStyles(day) {
-        if (beforeToday(day))   return "before";
-        if (isSelected(day))    return "selected";
-        if(isToday(day))    return "today";
+    function isAbsent(day) {
+        if(day.month() == 3) {
+            return day.format('D') == 2 || day.format('D') == 5 || day.format('D') == 6;
+        }
         return "";
+    }
+
+    function dayStyles(day) {
+        if(day.month() == 3 && day.format('D') < 28) {
+            if(isAbsent(day))  return "absent";
+            else    return "present";
+        }
+        else {
+            if (beforeToday(day))   return "before";
+            if (isSelected(day))    return "selected";
+            if(isToday(day))    return "today";
+            return "";
+        }
     }
 
     function currentMonthName() {
@@ -100,11 +113,13 @@ export default function Calendar() {
                                     <div className={ dayStyles(day) } style={{ cursor: 'pointer' }}>
                                         {day.format("D")}
                                     </div>
+                                    
                                 </div>)
                             }
                         </div>)
                     }
                 </div>
+                
             </div>
         );
 }
