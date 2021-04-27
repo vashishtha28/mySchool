@@ -12,6 +12,8 @@ import UpdateCurriculum from '../pages/update_curriculum';
 import UpdateAttendance from "../pages/updateAttendance";
 import GenerateNotice from "../pages/genNotice";
 import ViewNotice from "../pages/noticePage";
+import UpdateGrades from "../pages/updateGrades";
+import StudentGrade from "../pages/StudentGrade";
 import Remove from "../pages/remove";
 import server_url from './ServerLink';
 
@@ -179,6 +181,33 @@ const Main = () => {
             userInfo={globalData.user} 
             role={globalData.role}/>
         )}></Route>
+
+        <Route
+         exact 
+         path="/update/grades" 
+         render = {props =>(
+          <UpdateGrades 
+            {...props} 
+            handleLogout={handleLogout} 
+            loggedInStatus={globalData.loggedInStatus} 
+            userInfo={globalData.user} 
+            role={globalData.role}/>
+        )}></Route>
+
+        <Route
+         exact 
+         path="/student/grades" 
+         render = {props =>(
+          <StudentGrade 
+            {...props} 
+            handleLogout={handleLogout} 
+            loggedInStatus={globalData.loggedInStatus} 
+            userInfo={globalData.user} 
+            role={globalData.role}/>
+        )}></Route>
+
+        
+
         <Route exact path="/update/timetable" component={UpdateTimeTable}></Route>
         <Route exact path="/update/curriculum" component={UpdateCurriculum}></Route>
         </Switch>

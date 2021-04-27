@@ -74,6 +74,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Attendance(props){
 
     const classes = useStyles();
+    const history = useHistory();
     const [studentInfoList, setStudentInfoList] = useState([]);
     const [studentList, setStudentList] = useState([]);
     const [classTeacherOf, setClassTeacherOf] = useState({class:"", section:""});
@@ -125,9 +126,17 @@ export default function Attendance(props){
       });
     };
     const [selectedDate, setSelectedDate] = React.useState(new Date());
+    
     function handleSubmit(event){
       event.preventDefault();
-      console.log("Success");
+      axios.post(server_url+ "/update/attendance", {list: checkedStudent, date: selectedDate})
+      .then((response)=>{
+        console.log(response);
+      }, (error)=>{
+        console.log(error);
+      });
+
+      console.log(checkedStudent);
      }
 
   const handleDateChange = (date) => {
@@ -211,8 +220,8 @@ export default function Attendance(props){
           variant="contained"
           color="primary"
           className={classes.submit}
-          onClick={handleSubmit}
           style={{padding: "10px", background:"#00B594", width:"30%", margin:"0.625rem"}}
+          onClick = {handleSubmit}
         >
                 Save
         </Button>
@@ -222,8 +231,8 @@ export default function Attendance(props){
           variant="contained"
           color="primary"
           className={classes.submit}
-          onClick={handleSubmit}
           style={{padding: "10px", background:"#E96565", width:"30%", margin:"0.625rem"}}
+          onClick={()=>{history.push("/");}}
         >
                 Discard
         </Button>

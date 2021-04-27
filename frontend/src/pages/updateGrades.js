@@ -317,6 +317,7 @@ export default function Grades(props){
         </Button>
         </Container>   
       </div>
+      { props.role==="Teacher" && props.loggedInStatus==="LOGGED-IN" ? null : <Redirect to="/" /> }
     </div>
 
 }

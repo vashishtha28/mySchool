@@ -103,7 +103,7 @@ function TeacherDesk(props) {
                     </Button>}
                     </Grid>
                     <Grid item xs={12}>
-                    <Button variant="contained" style={{ color: 'white', backgroundColor: '#E96565', width: '500px', fontSize: '17px' }}>
+                    <Button variant="contained" style={{ color: 'white', backgroundColor: '#E96565', width: '500px', fontSize: '17px' }} onClick={()=>{history.push("/update/grades")}}>
                         Update Grades
                     </Button>
                     </Grid>
@@ -117,13 +117,13 @@ function TeacherDesk(props) {
                         Curriculum
                     </Button>
                     </Grid>
-                    <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                     <Button variant="contained" style={{ color: 'white', backgroundColor: '#070107', width: '500px', fontSize: '17px' }}>
                         View Notices
                     </Button>
-                    </Grid>
+                    </Grid> */}
                     <Grid item xs={12}>
-                    <Button variant="contained" style={{ color: 'white', backgroundColor: '#F8DE5B', width: '500px', fontSize: '17px' }} onClick={ handleGenerateNotice }>
+                    <Button variant="contained" style={{ color: 'white', backgroundColor: '#000000', width: '500px', fontSize: '17px' }} onClick={ handleGenerateNotice }>
                         Generate Notice
                     </Button>
                     </Grid>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect, useHistory} from "react-router-dom";
+import {Redirect, useHistory, NavLink} from "react-router-dom";
 import './../infobar.css';
 import MyAppBar, { useStyles } from './../components/MyAppBar';
 import Toolbar from "@material-ui/core/Toolbar";
@@ -17,8 +17,15 @@ function StudentProfile(props) {
     const history = useHistory();
     const infoclasses = infoStyles();
 
-    function handleNotice(){
+    function handleNotice(event){
+        event.preventDefault();
         history.push("/view/notice");
+    }
+    
+    function handleGrades(event){
+        event.preventDefault();
+        console.log("clicked");
+        history.push("/student/grades");
     }
 
     return (
@@ -88,7 +95,7 @@ function StudentProfile(props) {
                         </Paper>
                     </Grid>
                     <Grid item xs={6} sm={4}>
-                        <Paper classes={infoclasses.paper} style={{ backgroundColor:"#E96565", color:'#fff', padding: '15px', fontSize: '20px', fontWeight: '600', borderRadius:"20px" }}>
+                        <Paper classes={infoclasses.paper} style={{ backgroundColor:"#E96565", color:'#fff', padding: '15px', fontSize: '20px', fontWeight: '600', borderRadius:"20px" }} onClick = {handleGrades}>
                             <img src="https://img.icons8.com/color/110/000000/warranty-card.png"/>
                             <br></br>
                             Grade Card

@@ -500,10 +500,27 @@ app.post("/generate/student/notice", async function(req, res){
   });
   }
   res.send({message: "received notice"});
-
-
 });
 
+app.post("/update/attendance", function(req, res){
+  const selectedDate = req.body.date;
+  const presentList = req.body.list;
+  const attendanceData = {
+    date: selectedDate,
+    isPresent: true
+  }
+  presentList.forEach((student)=>{
+    StudentInfo.updateOne({_id:student._id}, { $addToSet: { attendanceList: attendanceData} }, function (err, docs) {
+      if (err){
+          console.log(err)
+      }
+      else{
+          console.log("Updated Docs : ", docs);
+      }
+    });
+  });
+  res.send({message:"received attendance data"});
+});
 
 
 app.listen(port, () => {

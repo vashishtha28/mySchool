@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Redirect, useHistory} from "react-router-dom";
 import MyAppBar from './../components/MyAppBar';
 import Box from '@material-ui/core/Box';
 import { FormControl, InputLabel, makeStyles } from '@material-ui/core';
@@ -93,7 +94,7 @@ const rows = [
     createData(date, 'PracticalExam2', 10, 10),
 ];
 
-export default function GradeCard() {
+export default function GradeCard(props) {
     const classes = useStyles();
     const [subject, setSubject] = useState('');
     const [page, setPage] = useState(0);
@@ -179,7 +180,7 @@ export default function GradeCard() {
                 </Paper>
             </Container>
 
-            
+            { props.role==="Student" && props.loggedInStatus==="LOGGED-IN" ? null : <Redirect to="/" /> }
 
         </div>  
     );
