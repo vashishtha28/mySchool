@@ -13,6 +13,7 @@ import GenerateNotice from "./pages/genNotice";
 import Attendance from "./pages/updateAttendance";
 import Main from "./components/Main";
 import Grades from "./pages/updateGrades";
+import ShowTimeTable from './pages/timeTable';
 
 
 
@@ -25,3 +26,4 @@ function App() {
 }
   
 export default App;
+  
