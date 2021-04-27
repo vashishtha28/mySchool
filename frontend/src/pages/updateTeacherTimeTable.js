@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function TeacherTimeTable(props) {
+  const history = useHistory();
   const classes = useStyles();
   const infoclasses = infoStyles();
   const [currentClass, setClass] = useState({
@@ -49,7 +50,7 @@ export default function TeacherTimeTable(props) {
     });
   };
   function handleSubmit(event){
-    console.log("Success");
+    history.push("/");
    }
 
   return (
@@ -126,7 +127,7 @@ export default function TeacherTimeTable(props) {
                 Submit
         </Button>
         </Container>   
-        {/* { props.role==="Admin"&&props.loggedInStatus==="LOGGED-IN" ? null : <Redirect to="/" /> } */}
+        { props.role==="Admin"&&props.loggedInStatus==="LOGGED-IN" ? null : <Redirect to="/" /> }
     </div>
   );
 }

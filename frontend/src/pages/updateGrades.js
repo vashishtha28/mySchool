@@ -80,7 +80,9 @@ const useStyles = makeStyles((theme) => ({
  
 export default function Grades(props){
 
+
     const classes = useStyles();
+    const history = useHistory();
     const [checkedStudent, setCheckedStudent] = useState([]); // Dekh lena isko
     const [selectedDate, setSelectedDate] = React.useState(new Date());
     const [studentGrade, setStudentGrade] = useState({
@@ -338,6 +340,7 @@ export default function Grades(props){
           className={classes.submit}
           //onClick={handleSubmit}
           style={{padding: "10px", background:"#E96565", width:"30%", margin:"0.625rem"}}
+          onClick={()=>{history.push("/")}}
         >
                 Discard
         </Button>

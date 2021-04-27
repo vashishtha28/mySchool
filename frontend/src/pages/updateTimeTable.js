@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TimeTable(props) {
   const classes = useStyles();
+  const history =useHistory();
   const infoclasses = infoStyles();
   const [currentClass, setClass] = useState({
       class : "",
@@ -50,7 +51,7 @@ export default function TimeTable(props) {
   };
  
   function handleSubmit(event){
-    console.log("Success");
+    history.push("/");
    }
   return (
     <div>

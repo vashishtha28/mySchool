@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Redirect, useHistory} from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -36,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Curriculum(props) {
   const classes = useStyles();
+  const history = useHistory();
   const infoclasses = infoStyles();
   const [selectedClass, setClass] = useState('');
   const [open, setOpen] = React.useState(false);
@@ -51,7 +53,7 @@ export default function Curriculum(props) {
     setOpen(true);
   };
   function handleSubmit(event){
-    console.log("Success");
+    history.push("/"); 
    }
 
   return (
@@ -132,7 +134,8 @@ export default function Curriculum(props) {
         >
                 Submit
         </Button>
-        </Container>   
+        </Container>  
+        { props.role==="Admin"&&props.loggedInStatus==="LOGGED-IN" ? null : <Redirect to="/" /> } 
     </div>
   );
 }

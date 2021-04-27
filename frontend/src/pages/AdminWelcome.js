@@ -71,6 +71,14 @@ export default function AdminPage(props) {
     history.push("/update/timetable");
   }
 
+  function handleUpdateTeacherTimeTable(){
+    history.push("/update/teacher/timetable")
+  }
+
+  function handleUpdateCurriculum(){
+    history.push("/update/curriculum");
+  }
+
   return (
 
     <div className={classes.root}>
@@ -96,13 +104,13 @@ export default function AdminPage(props) {
           <Button className={classes.paper} style={{ background: "#E96565", width:"100%"}} onClick={handleRemoveUser}>Remove Student / Teacher</Button>
         </Grid>
         <Grid item xs={12}>
-          <Button className={classes.paper} style={{ background: "#0097EC", width:"100%"}}>Update Teacher's Time Table</Button>
+          <Button className={classes.paper} style={{ background: "#0097EC", width:"100%"}} onClick = {handleUpdateTeacherTimeTable}>Update Teacher's Time Table</Button>
         </Grid>
         <Grid item xs={12}>
           <Button className={classes.paper} style={{ background: "#0097EC", width:"100%"}} onClick = {handleUpdateTimeTable}>Update Students's Time Table</Button>
         </Grid>
         <Grid item xs={12}>
-          <Button className={classes.paper} style={{ background: "#0097EC", width:"100%"}}>Update Curriculum</Button>
+          <Button className={classes.paper} style={{ background: "#0097EC", width:"100%"}} onClick = {handleUpdateCurriculum}>Update Curriculum</Button>
         </Grid>
         <Grid item xs={12}>
           <Button className={classes.paper} style={{ background: "#010207", width:"100%"}} onClick={handleGenerateNotice}>Generate Notice</Button>

@@ -16,6 +16,7 @@ import UpdateGrades from "../pages/updateGrades";
 import StudentGrade from "../pages/StudentGrade";
 import StudentAttendance from "../pages/studentAttendance";
 import StudentTimeTable from "../pages/timeTable";
+import UpdateTeacherTimeTable from "../pages/updateTeacherTimeTable";
 import Remove from "../pages/remove";
 import server_url from './ServerLink';
 
@@ -244,7 +245,29 @@ const Main = () => {
             role={globalData.role}/>
         )}></Route>
 
-        <Route exact path="/update/curriculum" component={UpdateCurriculum}></Route>
+        <Route
+         exact 
+         path="/update/teacher/timetable" 
+         render = {props =>(
+          <UpdateTeacherTimeTable 
+            {...props} 
+            handleLogout={handleLogout} 
+            loggedInStatus={globalData.loggedInStatus} 
+            userInfo={globalData.user} 
+            role={globalData.role}/>
+        )}></Route>
+
+        <Route
+         exact 
+         path="/update/curriculum" 
+         render = {props =>(
+          <UpdateCurriculum 
+            {...props} 
+            handleLogout={handleLogout} 
+            loggedInStatus={globalData.loggedInStatus} 
+            userInfo={globalData.user} 
+            role={globalData.role}/>
+        )}></Route>
         </Switch>
 
       </BrowserRouter>
