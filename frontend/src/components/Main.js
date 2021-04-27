@@ -15,6 +15,7 @@ import ViewNotice from "../pages/noticePage";
 import UpdateGrades from "../pages/updateGrades";
 import StudentGrade from "../pages/StudentGrade";
 import StudentAttendance from "../pages/studentAttendance";
+import StudentTimeTable from "../pages/timeTable";
 import Remove from "../pages/remove";
 import server_url from './ServerLink';
 
@@ -212,6 +213,18 @@ const Main = () => {
          path="/student/attendance" 
          render = {props =>(
           <StudentAttendance 
+            {...props} 
+            handleLogout={handleLogout} 
+            loggedInStatus={globalData.loggedInStatus} 
+            userInfo={globalData.user} 
+            role={globalData.role}/>
+        )}></Route>
+
+        <Route
+         exact 
+         path="/student/timetable" 
+         render = {props =>(
+          <StudentTimeTable 
             {...props} 
             handleLogout={handleLogout} 
             loggedInStatus={globalData.loggedInStatus} 

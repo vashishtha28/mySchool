@@ -32,6 +32,10 @@ function StudentProfile(props) {
         history.push("/student/attendance");
     }
 
+    function handleTimeTable(){
+        history.push("/student/timetable");
+    }
+
     return (
         <div>
             <MyAppBar 
@@ -117,7 +121,7 @@ function StudentProfile(props) {
             <Container maxWidth="md" style={{color: 'white', display: 'flex' }}>
                 <Grid container spacing={3} style={{ justifyContent: 'space-evenly'}}>
                     <Grid item xs={6} sm={4}>
-                        <Paper classes={infoclasses.paper} style={{ backgroundColor:"#00B594", color:'#fff', padding: '15px', fontSize: '20px', fontWeight: '600', borderRadius:"20px" }}>
+                        <Paper classes={infoclasses.paper} style={{ backgroundColor:"#00B594", color:'#fff', padding: '15px', fontSize: '20px', fontWeight: '600', borderRadius:"20px" }} onClick={handleTimeTable}>
                             <img src="https://img.icons8.com/color/110/000000/overtime.png"/>
                             <br></br>
                             Time Table
