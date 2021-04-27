@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Redirect} from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -14,6 +15,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { infoStyles } from './../components/InfoBar';
 import MyAppBar from "../components/MyAppBar";
 import tt from '../components/tt.jpg';
+import teacherTT from '../components/teacherTimeTable.JPG';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -55,7 +57,8 @@ export default function ShowTimeTable(props){
         </Container>
     </Box>
     <Container component="main" maxWidth="md" style={{marginTop: "6%"}}>
-        <img src={tt} width="100%"></img>
+        {props.role=="Student" ? <img src={tt} width="100%"></img> : <img src={teacherTT} width="100%"></img> }
     </Container>
+    { (props.role==="Student" || props.role==="Teacher") && props.loggedInStatus==="LOGGED-IN" ? null : <Redirect to="/" /> }
     </div>
 }

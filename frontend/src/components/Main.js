@@ -232,9 +232,18 @@ const Main = () => {
             role={globalData.role}/>
         )}></Route>
 
-        
+        <Route
+         exact 
+         path="/update/timetable" 
+         render = {props =>(
+          <UpdateTimeTable 
+            {...props} 
+            handleLogout={handleLogout} 
+            loggedInStatus={globalData.loggedInStatus} 
+            userInfo={globalData.user} 
+            role={globalData.role}/>
+        )}></Route>
 
-        <Route exact path="/update/timetable" component={UpdateTimeTable}></Route>
         <Route exact path="/update/curriculum" component={UpdateCurriculum}></Route>
         </Switch>
 

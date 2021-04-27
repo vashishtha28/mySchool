@@ -108,7 +108,7 @@ function TeacherDesk(props) {
                     </Button>
                     </Grid>
                     <Grid item xs={12}>
-                    <Button variant="contained" style={{ color: 'white', backgroundColor: '#00B594', width: '500px', fontSize: '17px' }}>
+                    <Button variant="contained" style={{ color: 'white', backgroundColor: '#00B594', width: '500px', fontSize: '17px' }} onClick={()=>{history.push("/student/timetable")}}>
                         Teacher's Time Table
                     </Button>
                     </Grid>

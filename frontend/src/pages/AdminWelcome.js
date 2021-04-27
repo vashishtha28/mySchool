@@ -67,6 +67,10 @@ export default function AdminPage(props) {
     history.push("/generate/notice");
   }
 
+  function handleUpdateTimeTable(){
+    history.push("/update/timetable");
+  }
+
   return (
 
     <div className={classes.root}>
@@ -95,7 +99,7 @@ export default function AdminPage(props) {
           <Button className={classes.paper} style={{ background: "#0097EC", width:"100%"}}>Update Teacher's Time Table</Button>
         </Grid>
         <Grid item xs={12}>
-          <Button className={classes.paper} style={{ background: "#0097EC", width:"100%"}}>Update Students's Time Table</Button>
+          <Button className={classes.paper} style={{ background: "#0097EC", width:"100%"}} onClick = {handleUpdateTimeTable}>Update Students's Time Table</Button>
         </Grid>
         <Grid item xs={12}>
           <Button className={classes.paper} style={{ background: "#0097EC", width:"100%"}}>Update Curriculum</Button>
