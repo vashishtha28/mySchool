@@ -28,6 +28,10 @@ function StudentProfile(props) {
         history.push("/student/grades");
     }
 
+    function handleAttendance(){
+        history.push("/student/attendance");
+    }
+
     return (
         <div>
             <MyAppBar 
@@ -88,7 +92,7 @@ function StudentProfile(props) {
             <Container maxWidth="md" style={{color: 'white', display: 'flex', marginBottom: '21px', marginTop: '12px'}}>
                 <Grid container spacing={3} style={{ justifyContent: 'space-evenly', alignContent: 'center', marginTop:"10px"  }}>
                     <Grid item xs={6} sm={4}>
-                        <Paper classes={infoclasses.paper} style={{ backgroundColor:"#C293FF", color:'#fff', padding: '15px', fontSize: '20px', fontWeight: '600', borderRadius:"20px"}}>
+                        <Paper classes={infoclasses.paper} style={{ backgroundColor:"#C293FF", color:'#fff', padding: '15px', fontSize: '20px', fontWeight: '600', borderRadius:"20px"}} onClick = {handleAttendance}>
                             <img src="https://img.icons8.com/color/110/000000/inspection.png"/>
                             <br></br>
                             Attendance
