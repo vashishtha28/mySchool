@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {Redirect, useHistory} from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-
 import MyAppBar from "../components/MyAppBar";
 import Container from '@material-ui/core/Container';
 import Grid from "@material-ui/core/Grid"
@@ -60,7 +59,14 @@ const useStyles = makeStyles((theme) => ({
     selectEmpty: {
       marginTop: theme.spacing(2),
     },
-
+    inputStyle: {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+    inputStyle2: {
+      margin: theme.spacing(1),
+      width: '10ch',
+    }
   }));
 
   const theme = createMuiTheme({
@@ -76,11 +82,15 @@ export default function Grades(props){
 
     const classes = useStyles();
     const [checkedStudent, setCheckedStudent] = useState([]); // Dekh lena isko
+    const [selectedDate, setSelectedDate] = React.useState(new Date());
     const [studentGrade, setStudentGrade] = useState({
         class : "",
         section : "",
         subject : "",
     });
+    const handleDateChange = (date) => {
+      setSelectedDate(date);
+    };
     const [grade, setGrade] = useState([]);
     const handleToggle = (value) => async () => {
         const currentIndex = checkedStudent.indexOf(value);
@@ -144,7 +154,7 @@ export default function Grades(props){
                     </Grid>
                 </Grid>
                 <Grid container style={{ justifyContent: 'space-around' }}>
-                    <Grid item xs={12} md={4} style={{ alignContent: 'right', float: 'left' }}>                
+                    <Grid item xs={12} md={3} style={{ alignContent: 'right', float: 'left' }}>                
                     <FormControl className={classes.formControl}>
                         <InputLabel id="Class">Class</InputLabel>
                         <Select
@@ -174,7 +184,7 @@ export default function Grades(props){
                         </Select>
                     </FormControl>
                     </Grid>
-                    <Grid item xs={12} md={4} style={{ alignContent: 'right', float: 'left' }}>                
+                    <Grid item xs={12} md={3} style={{ alignContent: 'right', float: 'left' }}>                
                     <FormControl className={classes.formControl}>
                         <InputLabel id="section">Section</InputLabel>
                         <Select
@@ -218,7 +228,7 @@ export default function Grades(props){
                         </Select>
                     </FormControl>
                     </Grid>
-                    <Grid item xs={12} md={4} style={{ alignContent: 'right', float: 'left' }}>                
+                    <Grid item xs={12} md={3} style={{ alignContent: 'right', float: 'left' }}>                
                     <FormControl className={classes.formControl}>
                         <InputLabel id="subject">Subject</InputLabel>
                         <Select
@@ -239,9 +249,47 @@ export default function Grades(props){
                         </Select>
                     </FormControl>
                     </Grid>
+                    <Grid item xs={12} md ={3} style={{ alignContent: 'right', float: 'left' }}>                
+                    <ThemeProvider theme={theme}>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker
+                      className={classes.formControl}
+                      margin="normal"
+                      variant="inline"
+                      id="date-picker-dialog"
+                      label="Test Date"
+                      format="dd/MM/yyyy"
+                      value={selectedDate}
+                      onChange={handleDateChange}
+                      KeyboardButtonProps={{
+                        'aria': 'change date',
+                        'color': "primary"
+                    }}
+                    />
+                    </MuiPickersUtilsProvider></ThemeProvider>
+                    </Grid>
+                </Grid>
+                <Grid container style={{ justifyContent: 'space-around' }}>
+                    <Grid item xs={12}>
+                        <h4>Please specify the test details!</h4>
+                    </Grid>
+                </Grid>
+                  
+                <Grid container spacing={0}  direction="column" alignItems="center" justify="center" >
+                  <Grid item xs={12} style={{ textAlign: 'center' }}> 
+                  <form className={classes.inputStyle} noValidate autoComplete="off">
+                    <TextField id="standard-basic" label="Test Description" />
+                  </form>
+                </Grid>
+                <Grid item xs={12}  style={{ alignContent: 'center' }}> 
+                  <form className={classes.inputStyle} noValidate autoComplete="off">
+                    <TextField id="standard-basic" label="Max Marks" />
+                  </form>
+                </Grid>
                 </Grid>
                 </Container>
             </Box>
+
             <br></br><br></br>
         <div>
         <Container>
@@ -259,31 +307,9 @@ export default function Grades(props){
                         <ListItemText  primary={value.roll} />
                         <ListItemText  primary={value.name} />
                         <ListItemSecondaryAction>
-                        <FormControl className={classes.formControl}>
-                        <Select
-                        labelId="grade"
-                        id="grade"
-                        name="grade"
-                        value={studentGrade.grade}
-                        onChange={handleToggle}
-                        className={classes.selectEmpty}
-                        required
-                        >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={"1"}>1</MenuItem>
-                        <MenuItem value={"2"}>2</MenuItem>
-                        <MenuItem value={"3"}>3</MenuItem>
-                        <MenuItem value={"4"}>4</MenuItem>
-                        <MenuItem value={"5"}>5</MenuItem>
-                        <MenuItem value={"6"}>6</MenuItem>
-                        <MenuItem value={"7"}>7</MenuItem>
-                        <MenuItem value={"8"}>8</MenuItem>
-                        <MenuItem value={"9"}>9</MenuItem>
-                        <MenuItem value={"10"}>10</MenuItem>
-                        </Select>
-                    </FormControl>
+                        <form className={classes.inputStyle2} noValidate autoComplete="off">
+                            <TextField id="standard-basic" label="Marks" />
+                        </form>
                         </ListItemSecondaryAction>
                     </ListItem>
                     );
@@ -321,45 +347,3 @@ export default function Grades(props){
     </div>
 
 }
-{/* <List dense className={classes.root}>
-            <Typography component="h1" variant="h5">
-                    Select your subjects
-                </Typography>
-                <hr/>
-                    
-                        <ListItem button>
-                        <ListItemText primary="Roll Number" />
-                        <ListItemText  primary= "Name"/>
-                        <ListItemSecondaryAction>
-                        <FormControl className={classes.formControl}>
-                        <InputLabel id="Class">Class</InputLabel>
-                        <Select
-                        labelId="class"
-                        id="class"
-                        name="class"
-                        value={studentGrade.class}
-                        onChange={handleChange}
-                        className={classes.selectEmpty}
-                        required
-                        >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={"1"}>1</MenuItem>
-                        <MenuItem value={"2"}>2</MenuItem>
-                        <MenuItem value={"3"}>3</MenuItem>
-                        <MenuItem value={"4"}>4</MenuItem>
-                        <MenuItem value={"5"}>5</MenuItem>
-                        <MenuItem value={"6"}>6</MenuItem>
-                        <MenuItem value={"7"}>7</MenuItem>
-                        <MenuItem value={"8"}>8</MenuItem>
-                        <MenuItem value={"9"}>9</MenuItem>
-                        <MenuItem value={"10"}>10</MenuItem>
-                        <MenuItem value={"11"}>11</MenuItem>
-                        <MenuItem value={"12"}>12</MenuItem>
-                        </Select>
-                    </FormControl>
-                        </ListItemSecondaryAction>
-                    </ListItem>
-                
-            </List> */}
