@@ -50,6 +50,9 @@ export default function Curriculum(props) {
   const handleOpen = () => {
     setOpen(true);
   };
+  function handleSubmit(event){
+    console.log("Success");
+   }
 
   return (
     <div>
@@ -118,6 +121,18 @@ export default function Curriculum(props) {
                 </label>
               </p>
             </div>
+            <Container component="main" maxWidth="md">
+          <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          style={{padding: "10px", background:"#00B594", width:"30%", margin:"0.625rem"}}
+          onClick = {handleSubmit}
+        >
+                Submit
+        </Button>
+        </Container>   
     </div>
   );
 }
